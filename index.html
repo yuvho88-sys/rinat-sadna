@@ -202,6 +202,15 @@ h2 .hi { color: var(--hi); }
 /* חץ זהב בסוף הכפתור (בעברית החץ שמאלה). בכפתור הקטן בתפריט אין חץ */
 .btn::after { content: "←"; content: "←" / ""; color: var(--gold); font-weight: 400; font-size: 1.15em; line-height: 1; }
 .nav-panel .btn::after { content: none; }
+/* ברק על הכפתורים (03/11, יובל: "שהקריאות לפעולה יהבהבו"): פס אור עדין עובר על הכפתור, פעמיים, בכל פעם שהכפתור נכנס למסך וגם בריחוף.
+   לא הבהוב מתמשך: כל ריצה קצרה מ־5 שניות, ובהעדפת תנועה מופחתת אין ברק בכלל */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(105deg, transparent 32%, rgba(255, 238, 200, 0.10) 42%, rgba(255, 238, 200, 0.34) 50%, rgba(255, 238, 200, 0.10) 58%, transparent 68%); transform: translateX(130%); }
+[data-theme="navy"] .btn::before, [data-theme="deep"] .btn::before { background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.15) 58%, transparent 68%); }
+[data-theme="navy"] [data-theme="white"] .btn::before, [data-theme="navy"] [data-theme="pearl"] .btn::before { background: linear-gradient(105deg, transparent 32%, rgba(255, 238, 200, 0.10) 42%, rgba(255, 238, 200, 0.34) 50%, rgba(255, 238, 200, 0.10) 58%, transparent 68%); }
+.btn.is-shine::before { animation: btn-shine 1.5s cubic-bezier(0.4, 0, 0.2, 1) 2; }
+.btn:hover::before { animation: btn-shine 1.1s cubic-bezier(0.4, 0, 0.2, 1) 1; }
+@keyframes btn-shine { from { transform: translateX(130%); } to { transform: translateX(-130%); } }
 /* על רקע נייבי: כפתור זהב עם טקסט נייבי, כי נייבי על נייבי לא נראה */
 [data-theme="navy"] .btn, [data-theme="deep"] .btn { background: var(--gold); color: var(--navy); box-shadow: none; }
 [data-theme="navy"] .btn:hover, [data-theme="deep"] .btn:hover { background: var(--gold-deep); }
@@ -608,7 +617,7 @@ h2 .hi { color: var(--hi); }
   <div class="frame hero">
     <div class="hero-copy" data-reveal="stagger">
       <p class="eyebrow">מכירות והשפעה · סדנת בוטיק לבעלי עסקים</p>
-      <h1><span class="h1-a">יש לך הרבה מה לתת.</span><span class="h1-b em">איך מעבירים את&nbsp;זה <span class="nw"><span class="u">בשיחת&nbsp;מכירה</span>?</span></span></h1>
+      <h1><span class="h1-a">יש לך הרבה מה לתת.</span><span class="h1-b em">איך מעבירים את&nbsp;זה <span class="nw"><span class="u">בשיחת&nbsp;מכירה?</span></span></span></h1>
       <p class="lede">כשהשיחה מגיעה למחיר או ל״אני צריך לחשוב על זה״, קל לאבד את הכיוון. בסדנה נבנה דרך ברורה להוביל את השיחה, עם עוגנים שמתאימים לאופי שלך ולעסק שלך.</p>
       <p class="hero-line">בלי לשנן תסריטים, בלי להפעיל לחץ ובלי לשחק מישהו&nbsp;אחר.</p>
       <div class="cta">
@@ -1004,6 +1013,22 @@ h2 .hi { color: var(--hi); }
   var hasIO = 'IntersectionObserver' in w;
   var sent = false;              /* אחרי שליחה מוצלחת: הכפתור הצמוד לא חוזר */
   var dockSync = function () {};
+
+  /* ── ברק על הכפתורים: כשכפתור נכנס למסך (או כשהכפתור הצמוד מופיע) הוא מקבל את הברק פעמיים. בתנועה מופחתת: כלום ── */
+  if (!reduce) {
+    var shine = function (b) { b.classList.remove('is-shine'); void b.offsetWidth; b.classList.add('is-shine'); };
+    var btns = d.querySelectorAll('.btn');
+    for (var bi = 0; bi < btns.length; bi++) btns[bi].addEventListener('animationend', function (e) { if (e.animationName === 'btn-shine') this.classList.remove('is-shine'); });
+    if (hasIO) {
+      var shineIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) shine(e.target); }); }, { threshold: 0.9 });
+      for (var bj = 0; bj < btns.length; bj++) { if (!btns[bj].closest('.dock')) shineIO.observe(btns[bj]); }
+    }
+    var dockEl = d.getElementById('dock');
+    if (dockEl && 'MutationObserver' in w) {
+      var dockWas = dockEl.classList.contains('is-on');
+      new MutationObserver(function () { var on = dockEl.classList.contains('is-on'); if (on && !dockWas) { var db = dockEl.querySelector('.btn'); if (db) shine(db); } dockWas = on; }).observe(dockEl, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
 
   /* ── ציטוטים מתחלפים בכותרת ההמלצות: כל 3.5 שניות, רק כשהחלק במסך. עצירה: נגיעה בציטוט, או הכפתור שנראה רק במיקוד מקלדת. בתנועה מופחתת: מתחלפים בלי מעבר ── */
   var rq = d.getElementById('rq'), rqBtn = d.getElementById('rq-btn');
