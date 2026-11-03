@@ -129,7 +129,6 @@ button, input, select { font: inherit; }
 p { text-wrap: pretty; }
 .checks li, .syl-t { text-wrap: pretty; }
 /* בציטוט הממורכז pretty השאיר מילה בודדת בשורה האחרונה (כרום 156), ולכן balance כמו בכותרות */
-.hero-proof-q { text-wrap: balance; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 [data-theme] { background: var(--bg); color: var(--fg); }
@@ -279,7 +278,7 @@ h2 .hi { color: var(--hi); }
 
 /* ===================== hero ===================== */
 #hero { padding-block: 2.5rem 3.5rem; }
-.hero { display: grid; gap: 2.5rem; }
+.hero { display: grid; gap: 1.75rem; } /* 03/11: שורת ההוכחה ירדה מהפתיחה, הרווח לתמונה צומצם */
 .hero-copy { display: grid; gap: 1.1rem; }
 #hero h1 { font-size: 2.55rem; line-height: 1.08; letter-spacing: -0.02em; margin-block: 0.25rem 0.35rem; }
 #hero h1 > span { display: block; }
@@ -289,9 +288,6 @@ h2 .hi { color: var(--hi); }
 .cta { margin-top: 0.75rem; }
 .cta .btn, .proof-cta .btn, .fmt-card .btn { width: 100%; }
 .cta-note { margin-top: 0.8rem; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-2); }
-.hero-proof { margin-top: 1.25rem; display: grid; gap: 0.1rem; justify-items: start; max-width: 34rem; }
-.hero-proof-q { font-family: var(--display); font-weight: 700; font-size: 1.1rem; line-height: 1.35; }
-.hero-proof .arrow-link { font-size: 0.9375rem; }
 .hero-photo { position: relative; isolation: isolate; margin-inline-end: 0.9rem; margin-top: 0.9rem; }
 .hero-photo::before { content: ""; position: absolute; z-index: -1; top: -0.9rem; inset-inline-end: -0.9rem; bottom: 2rem; inset-inline-start: 2rem; background: var(--pearl); }
 .hero-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 18%; background: var(--pearl); }
@@ -623,7 +619,6 @@ h2 .hi { color: var(--hi); }
       <div class="cta">
         <a class="btn" id="hero-cta" href="#form" data-cta="hero">אני רוצה לבדוק התאמה לסדנה</a>
         <p class="cta-note">30 דקות · ללא עלות · ללא התחייבות</p>
-        <p class="hero-proof"><span class="hero-proof-q">״הראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים.״</span> <a class="arrow-link" href="#proof">לכל ההמלצות<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M14 8H2m5-5L2 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
       </div>
     </div>
     <figure class="hero-photo" data-reveal>
