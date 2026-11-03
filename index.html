@@ -19,20 +19,27 @@
    טיוטה 3, 01/11/2026. הטקסט: copy/05-דף-נחיתה-סדנה.md, מילה במילה.
    הפלטה של רינת, ללא שינוי. גופנים: Frank Ruhl Libre לכותרות,
    Assistant לטקסט. בלי ספריות, בלי סקריפטים חיצוניים.
+   03/11/2026: עשרת התיקונים הממוקדים מבקרת רפאל (review-draft3-ux-2026-11-03.md),
+   בלי שינוי בפלטה, בגופנים או ברכיבים. הגיבוי שלפניהם: index-draft3-2026-11-01.html.
+   03/11/2026, סבב הערות יובל: בלי סימוני טיוטה, בלי ציטוט מתחת לקרוסלה,
+   מספרים בלי אפס מוביל, מילת מפתח מודגשת בכל כותרת, כפתורי זהב במקום קישורי חץ לטופס.
+   הגיבוי שלפני הסבב: index-2026-11-03-fixes1.html.
 
    שלוש החלטות העיצוב:
    1. הרעיון החזותי: מפת דרכים לשיחה. קו זהב דק עובר בדף
       (קו הפתיח של כל חלק, המסילה של ארבעת העוגנים, קווי הרשימות),
       ומספרים גדולים בסריף הם התחנות.
-   2. צבע הדגשה אחד: זהב #D4B373. טקסט זהב רק על נייבי.
-      על לבן ועל פנינה הזהב הוא קו, מסגרת או רקע כפתור עם טקסט נייבי.
+   2. צבע הדגשה אחד: זהב #D4B373. על נייבי הוא גם צבע טקסט.
+      על לבן ועל פנינה הזהב הוא קו, מסגרת או רקע כפתור, ומילות המפתח בכותרות
+      הכותרות בכחול של הלוגו #082F55, והביטוי המרכזי בזהב #B2861F על לבן ו־#A97F1E על פנינה, בלי קו מתחת (03/11).
    3. חתימת תנועה אחת: הקו "נמתח" (scale מאפס) והטקסט עולה מעט,
       פעם אחת, בעקומה אחת: cubic-bezier(0.165, 0.84, 0.44, 1).
       בנוסף רק הקרוסלה. prefers-reduced-motion מבטל הכול.
 
    ניגודיות (WCAG), נמדדה לכל צירוף טקסט ורקע בדף:
    זהב על נייבי 8.68 · זהב על נייבי עמוק 9.19 · זהב על נייבי בהיר 7.39
-   נייבי על לבן 17.37 · נייבי על פנינה 14.65
+   נייבי על לבן 17.37 · נייבי על פנינה 14.65 · לבן על נייבי 17.37
+   #082F55 על לבן 13.56 · על פנינה 11.44 · זהב #B2861F על לבן 3.32 · #A97F1E על פנינה 3.08 (כותרות גדולות, סף 3)
    נייבי על זהב (כפתור) 8.68 · נייבי על זהב כהה (ריחוף) 7.08
    פנינה על נייבי 14.65 · פנינה על נייבי עמוק 15.51
    ערפל #AEB9C6 על נייבי 8.73 · ערפל על נייבי עמוק 9.24
@@ -43,12 +50,16 @@
 
 :root {
   --navy:      #0E1B2A;
+  --head:      #082F55; /* כותרות על לבן ועל פנינה, לפי הלוגו (03/11): 13.56 על לבן, 11.44 על פנינה */
+  --gold-on-white: #B2861F; /* מילים מודגשות בכותרות על לבן (03/11, במקום הברונזה): זהב באותו גוון כמו זהב המותג, 3.32 על לבן, כותרות גדולות */
+  --gold-on-pearl: #A97F1E; /* אותו זהב, טיפה עמוק יותר לפנינה: 3.08 */
   --gold:      #D4B373;
   --pearl:     #E9ECEF;
   --white:     #FFFFFF;
   --navy-2:    #17293D;
   --navy-deep: #0A1521;
   --gold-deep: #C2A15F;
+  --gold-ink:  #7E6128;
   --ink-2:     #46536A;
   --mist:      #AEB9C6;
   --line-ui:   #7A8596;
@@ -61,6 +72,7 @@
   --fg-2: var(--ink-2);
   --hair: var(--rule);
   --hi: var(--navy);
+  --em: var(--head);
   --focus: var(--navy);
   --ring: var(--white);
 
@@ -79,16 +91,17 @@
 
 /* שורש נוזלי: הדף כולו ב-rem */
 html {
-  font-size: clamp(15px, 4.1vw, 17px);
+  font-size: clamp(16px, 4.1vw, 17px);
   background: var(--white);
   color: var(--navy);
   color-scheme: light;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
-@media (min-width: 600px)  { html { font-size: clamp(15px, 2vw, 17px); } :root { --gutter: 2.5rem; --sec: 6rem; } }
+@media (min-width: 600px)  { html { font-size: clamp(16px, 2vw, 17px); } :root { --gutter: 2.5rem; --sec: 6rem; } }
 @media (min-width: 900px)  { html { scroll-padding-top: 5.5rem; } }
-@media (min-width: 1025px) { html { font-size: clamp(15px, min(1.15vw, 2.2vh), 21px); } :root { --gutter: 4rem; --sec: 7.5rem; } }
+/* מ-1025 גוף הטקסט 1.0625rem, ולכן רצפת השורש 15.06px נותנת גוף טקסט של 16px לפחות */
+@media (min-width: 1025px) { html { font-size: clamp(15.06px, min(1.15vw, 2.2vh), 21px); } :root { --gutter: 4rem; --sec: 7.5rem; } }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -114,13 +127,16 @@ img { max-width: 100%; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 button, input, select { font: inherit; }
 p { text-wrap: pretty; }
+.checks li, .syl-t { text-wrap: pretty; }
+/* בציטוט הממורכז pretty השאיר מילה בודדת בשורה האחרונה (כרום 156), ולכן balance כמו בכותרות */
+.hero-proof-q { text-wrap: balance; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 [data-theme] { background: var(--bg); color: var(--fg); }
-[data-theme="white"] { --bg: var(--white); --fg: var(--navy); --fg-2: var(--ink-2); --hair: var(--rule); --hi: var(--navy); --focus: var(--navy); --ring: var(--white); }
-[data-theme="pearl"] { --bg: var(--pearl); --fg: var(--navy); --fg-2: var(--ink-2); --hair: #CBD2DA; --hi: var(--navy); --focus: var(--navy); --ring: var(--pearl); }
-[data-theme="navy"]  { --bg: var(--navy); --fg: var(--pearl); --fg-2: var(--mist); --hair: var(--rule-navy); --hi: var(--gold); --focus: var(--gold); --ring: var(--navy); }
-[data-theme="deep"]  { --bg: var(--navy-deep); --fg: var(--pearl); --fg-2: var(--mist); --hair: var(--rule-navy); --hi: var(--gold); --focus: var(--gold); --ring: var(--navy-deep); }
+[data-theme="white"] { --bg: var(--white); --fg: var(--navy); --fg-2: var(--ink-2); --hair: var(--rule); --hi: var(--navy); --em: var(--head); --focus: var(--navy); --ring: var(--white); }
+[data-theme="pearl"] { --bg: var(--pearl); --fg: var(--navy); --fg-2: var(--ink-2); --hair: #CBD2DA; --hi: var(--navy); --em: var(--head); --focus: var(--navy); --ring: var(--pearl); }
+[data-theme="navy"]  { --bg: var(--navy); --fg: var(--pearl); --fg-2: var(--mist); --hair: var(--rule-navy); --hi: var(--gold); --em: var(--gold); --focus: var(--gold); --ring: var(--navy); }
+[data-theme="deep"]  { --bg: var(--navy-deep); --fg: var(--pearl); --fg-2: var(--mist); --hair: var(--rule-navy); --hi: var(--gold); --em: var(--gold); --focus: var(--gold); --ring: var(--navy-deep); }
 
 .frame { width: 100%; max-width: calc(var(--wide) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
 .s { padding-block: var(--sec); }
@@ -128,10 +144,26 @@ p { text-wrap: pretty; }
 /* ===================== טיפוגרפיה ===================== */
 h2 { font-size: 2.05rem; line-height: 1.12; letter-spacing: -0.02em; }
 h2 > span { display: block; }
-h2 .dim { color: var(--fg-2); }
+h2 > span.w { display: inline; }
 h2 .hi { color: var(--hi); }
+/* מילת המפתח בכותרת (03/11): על לבן ועל פנינה הביטוי המרכזי (.u) בזהב, ושאר הכותרת בכחול של הלוגו. על נייבי טקסט זהב */
+.em { color: var(--em); }
+/* 03/11: בלי קו מתחת. ההדגשה היא צבע בלבד: זהב על לבן ועל פנינה. הכותרות עצמן בכחול של הלוגו */
+[data-theme="white"] :is(h1, h2, h3), [data-theme="pearl"] :is(h1, h2, h3) { color: var(--head); }
+[data-theme="white"] .u { color: var(--gold-on-white); }
+[data-theme="pearl"] .u { color: var(--gold-on-pearl); }
+/* זהב מבריק (03/11, יובל: "יותר זהבהב"): מעבר עדין מזהב בהיר למעלה לזהב עמוק למטה, בתוך האותיות. הצבע השטוח למעלה הוא הגיבוי */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  [data-theme="white"] .u, [data-theme="pearl"] .u {
+    background-image: linear-gradient(180deg, #E2BF63 0%, #D0A43A 38%, #B98B1C 72%, #A27714 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+}
+@media (forced-colors: active) { .u { -webkit-text-fill-color: currentColor; background: none; } }
+.nw { white-space: nowrap; }
 .lede { font-size: 1.125rem; line-height: 1.6; }
-.eyebrow { display: flex; align-items: center; gap: 0.75rem; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4; color: var(--hi); }
+.eyebrow { display: flex; align-items: center; gap: 0.75rem; font-size: max(13px, 0.8125rem); font-weight: 700; letter-spacing: 0; line-height: 1.4; color: var(--hi); }
 .eyebrow::before { content: ""; width: 2rem; height: 2px; background: var(--gold); flex: none; transform-origin: 100% 50%; }
 .eyebrow.center { justify-content: center; }
 .head { display: grid; gap: 1rem; }
@@ -140,12 +172,16 @@ h2 .hi { color: var(--hi); }
 .head.center .lede { max-width: 40rem; }
 .split { display: grid; gap: 1.25rem; margin-bottom: 2.5rem; }
 .split .lede { color: var(--fg-2); max-width: 34rem; }
+/* stack: הטקסט המוביל מתחת לכותרת בכל רוחב, גדול יותר ובצבע הטקסט הראשי */
+.split.stack .lede { color: var(--fg); font-size: 1.25rem; line-height: 1.55; max-width: 40rem; }
 .cols { display: grid; gap: 2.25rem; }
 @media (min-width: 1025px) {
   h2 { font-size: 3.1rem; }
   .lede { font-size: 1.2rem; }
   .split { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 4rem; align-items: end; margin-bottom: 3.75rem; }
   .split .lede { justify-self: start; padding-bottom: 0.35rem; }
+  .split.stack { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
+  .split.stack .lede { font-size: 1.45rem; padding-bottom: 0; max-width: 48rem; }
   .cols { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 5rem; align-items: start; }
   .cols > .head { position: sticky; top: 6.5rem; }
 }
@@ -153,15 +189,27 @@ h2 .hi { color: var(--hi); }
 /* ===================== כפתורים וקישורים ===================== */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-  min-height: max(48px, 3.25rem);
+  min-height: 58px;
   padding: 0.85rem 1.75rem;
-  background: var(--gold); color: var(--navy);
-  border: 0; border-radius: 2px;
+  background: var(--navy); color: var(--white);
+  border: 0; border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(14, 27, 42, 0.10), 0 4px 12px rgba(14, 27, 42, 0.08);
   font-family: var(--text); font-size: 1rem; font-weight: 700; line-height: 1.25;
   text-align: center; text-decoration: none; cursor: pointer;
   transition: background-color var(--d-fast) var(--ease), transform var(--d-fast) var(--ease);
 }
-.btn:hover { background: var(--gold-deep); }
+.btn:hover { background: #1C2D44; }
+/* חץ זהב בסוף הכפתור (בעברית החץ שמאלה). בכפתור הקטן בתפריט אין חץ */
+.btn::after { content: "←"; content: "←" / ""; color: var(--gold); font-weight: 400; font-size: 1.15em; line-height: 1; }
+.nav-panel .btn::after { content: none; }
+/* על רקע נייבי: כפתור זהב עם טקסט נייבי, כי נייבי על נייבי לא נראה */
+[data-theme="navy"] .btn, [data-theme="deep"] .btn { background: var(--gold); color: var(--navy); box-shadow: none; }
+[data-theme="navy"] .btn:hover, [data-theme="deep"] .btn:hover { background: var(--gold-deep); }
+[data-theme="navy"] .btn::after, [data-theme="deep"] .btn::after { color: var(--navy); }
+/* כרטיס לבן או פנינה בתוך חלק נייבי (למשל כרטיס הטופס): שוב כפתור נייבי */
+[data-theme="navy"] [data-theme="white"] .btn, [data-theme="navy"] [data-theme="pearl"] .btn { background: var(--navy); color: var(--white); box-shadow: 0 1px 2px rgba(14, 27, 42, 0.10), 0 4px 12px rgba(14, 27, 42, 0.08); }
+[data-theme="navy"] [data-theme="white"] .btn:hover, [data-theme="navy"] [data-theme="pearl"] .btn:hover { background: #1C2D44; }
+[data-theme="navy"] [data-theme="white"] .btn::after, [data-theme="navy"] [data-theme="pearl"] .btn::after { color: var(--gold); }
 .btn:active { transform: translateY(1px); }
 .arrow-link { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.3em; min-height: 44px; }
 .arrow-link svg { width: 1.1rem; height: 1.1rem; flex: none; transition: transform var(--d-fast) var(--ease); }
@@ -170,11 +218,6 @@ h2 .hi { color: var(--hi); }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skip { position: absolute; top: 0; inset-inline-start: 0; z-index: 60; padding: 0.75rem 1rem; background: var(--navy); color: var(--pearl); width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skip:focus { width: auto; height: auto; clip-path: none; outline-color: var(--gold); }
-
-/* סימוני טיוטה. יורדים כשהדף עולה לאוויר */
-.draft { margin: 0; padding: 0.45rem var(--gutter); background: var(--pearl); color: var(--ink-2); font-size: 0.8125rem; font-weight: 600; line-height: 1.45; text-align: center; }
-.draft-note { display: inline-block; font-size: 0.8125rem; font-weight: 600; line-height: 1.5; color: var(--fg-2); border: 1px dashed var(--line-ui); border-radius: 2px; padding: 0.35rem 0.7rem; }
-.tag { display: inline-block; vertical-align: middle; margin-inline-start: 0.5rem; font-family: var(--text); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; line-height: 1.5; color: var(--fg-2); border: 1px dashed var(--line-ui); border-radius: 2px; padding: 0.05rem 0.45rem; white-space: nowrap; }
 
 /* ===================== חשיפה בגלילה: פעם אחת, עדין ===================== */
 .js [data-reveal] { opacity: 0; transform: translateY(1.1rem); transition: opacity var(--d-slow) var(--ease), transform var(--d-slow) var(--ease); }
@@ -230,21 +273,24 @@ h2 .hi { color: var(--hi); }
 .hero { display: grid; gap: 2.5rem; }
 .hero-copy { display: grid; gap: 1.1rem; }
 #hero h1 { font-size: 2.55rem; line-height: 1.08; letter-spacing: -0.02em; margin-block: 0.25rem 0.35rem; }
-#hero h1 span { display: block; }
+#hero h1 > span { display: block; }
 #hero h1 .h1-b { margin-top: 0.25rem; }
 .hero-copy .lede { color: var(--ink-2); max-width: 34rem; }
 .hero-line { font-weight: 700; line-height: 1.55; max-width: 34rem; }
 .cta { margin-top: 0.75rem; }
-.cta .btn { width: 100%; }
+.cta .btn, .proof-cta .btn, .fmt-card .btn { width: 100%; }
 .cta-note { margin-top: 0.8rem; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-2); }
+.hero-proof { margin-top: 1.25rem; display: grid; gap: 0.1rem; justify-items: start; max-width: 34rem; }
+.hero-proof-q { font-family: var(--display); font-weight: 700; font-size: 1.1rem; line-height: 1.35; }
+.hero-proof .arrow-link { font-size: 0.9375rem; }
 .hero-photo { position: relative; isolation: isolate; margin-inline-end: 0.9rem; margin-top: 0.9rem; }
 .hero-photo::before { content: ""; position: absolute; z-index: -1; top: -0.9rem; inset-inline-end: -0.9rem; bottom: 2rem; inset-inline-start: 2rem; background: var(--pearl); }
 .hero-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 18%; background: var(--pearl); }
 .hero-tag { position: absolute; bottom: 1rem; inset-inline-start: 0.75rem; display: grid; gap: 0.1rem; padding: 0.8rem 1.1rem 0.9rem; background: var(--white); border: 1px solid var(--rule); border-inline-start: 3px solid var(--gold); box-shadow: 0 1rem 2rem rgba(14, 27, 42, 0.14); }
-.hero-tag-name { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-2); }
+.hero-tag-name { font-size: max(13px, 0.75rem); font-weight: 700; letter-spacing: 0; color: var(--ink-2); }
 .hero-tag-line { font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.01em; }
 @media (min-width: 600px) {
-  .cta .btn { width: auto; }
+  .cta .btn, .proof-cta .btn, .fmt-card .btn { width: auto; }
   .hero-photo { max-width: 28rem; }
 }
 @media (min-width: 1025px) {
@@ -272,11 +318,13 @@ h2 .hi { color: var(--hi); }
   .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .facts > div { border-top: 0; border-inline-start: 1px solid var(--rule-navy); padding-block: 0.6rem; padding-inline: 1.75rem; }
   .facts > div:first-child { border-inline-start: 0; padding-inline-start: 0; }
+  /* בשלוש עמודות המספר צמוד לתווית שלו; ברוחב מינימלי נשאר רק בנייד, ששם התוויות מיושרות זו מתחת לזו */
+  .facts dt { min-width: 0; }
 }
 @media (min-width: 1025px) {
   #facts { padding-block: 2.25rem; }
   .facts > div { padding-inline: 2.5rem; gap: 1.4rem; }
-  .facts dt { font-size: 3.5rem; min-width: 5.6rem; }
+  .facts dt { font-size: 3.5rem; }
 }
 
 /* ===================== pain: שלושה רגעים ===================== */
@@ -309,7 +357,7 @@ h2 .hi { color: var(--hi); }
 .rail li { position: relative; display: grid; gap: 0.45rem; align-content: start; }
 .rail li::before { content: ""; position: absolute; top: 0.55rem; inset-inline-start: -2.25rem; width: 1rem; height: 1rem; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 0.3rem var(--ring); }
 .rail-n { font-family: var(--display); font-weight: 700; font-size: 2.6rem; line-height: 1; letter-spacing: -0.02em; color: var(--fg); font-variant-numeric: tabular-nums; }
-.rail-k { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; color: var(--fg-2); margin-top: 0.35rem; }
+.rail-k { font-size: max(13px, 0.8125rem); font-weight: 700; letter-spacing: 0; color: var(--fg-2); margin-top: 0.35rem; }
 .rail h3 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.01em; }
 .rail-lead { font-weight: 700; line-height: 1.5; }
 .rail-text { color: var(--fg-2); }
@@ -336,54 +384,67 @@ h2 .hi { color: var(--hi); }
 @media (min-width: 700px) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2.5rem; } }
 @media (min-width: 1025px) { .steps h3 { font-size: 2.1rem; } .steps li { padding-top: 1.75rem; } }
 
-/* ===================== group: קבוצה קטנה ===================== */
-#group { padding-block: calc(var(--sec) * 0.85); }
-.group-text { display: grid; gap: 1.25rem; justify-items: start; }
-.group-text .lede { color: var(--fg-2); max-width: 36rem; }
-@media (min-width: 1025px) { .group-text { padding-top: 0.6rem; } }
-
 /* ===================== proof: קוברפלו ===================== */
 #proof .head { margin-bottom: 2.5rem; }
-#proof .head .draft-note { margin-top: 0.5rem; }
-.cf { --cw: min(40rem, 88vw); position: relative; height: calc(var(--cw) * 0.625 + 6rem); perspective: 90rem; perspective-origin: 50% 50%; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; }
+/* ציטוטים מתחלפים בכותרת ההמלצות: כולם באותו תא ברשת, כך שהגובה לפי הארוך ולא קופץ */
+#proof h2 > .rq { display: grid; }
+#proof .rq-i { grid-area: 1 / 1; opacity: 0; transition: opacity 0.6s ease; }
+#proof .rq-i.is-on { opacity: 1; }
+#proof .rq-btn { display: grid; margin: 1rem auto 0; width: 2.25rem; height: 2.25rem; min-width: 44px; min-height: 44px; border-color: var(--line-ui, #CBD2DA); color: var(--ink-2); }
+#proof .rq-btn svg { width: 0.75rem; height: 0.75rem; }
+#proof .rq-btn[aria-pressed="true"] .i-pause, #proof .rq-btn:not([aria-pressed="true"]) .i-play { display: none; }
+#proof .rq-btn[hidden] { display: none; }
+/* הכפתור לא נראה לעין. הוא מופיע רק במיקוד מקלדת (דרישת נגישות לעצירת תוכן שזז). בעכבר: ריחוף עוצר. במגע: נגיעה בציטוט עוצרת וממשיכה */
+#proof .rq-btn:not(:focus-visible) { position: absolute; width: 1px; height: 1px; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* הכרטיס עוטף את הצילום: רוחב קבוע, הגובה לפי הצילום.
+   כל השקופיות באותו תא גריד, ולכן גובה הבמה הוא גובה הכרטיס הגבוה, והוא לא זז בין שקופיות */
+.cf { --cw: min(40rem, 88vw); --cf-pad: 0.85rem; position: relative; padding-block: 3rem; perspective: 90rem; perspective-origin: 50% 50%; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; }
 .cf:active { cursor: grabbing; }
 .cf:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 .cf::before, .cf::after { content: ""; position: absolute; top: 0; bottom: 0; width: 6%; z-index: 20; pointer-events: none; }
 .cf::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
 .cf::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
-.cf-stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+.cf-stage { display: grid; transform-style: preserve-3d; }
 .cf-slide {
-  position: absolute; top: 50%; left: 50%; width: var(--cw); aspect-ratio: 16 / 10;
-  margin: 0; margin-left: calc(var(--cw) / -2);
-  padding: 0.85rem;
+  grid-area: 1 / 1; justify-self: center; align-self: center; width: var(--cw);
+  margin: 0;
+  padding: var(--cf-pad);
   background: var(--pearl); border: 1px solid var(--rule); border-radius: 0.9rem;
   box-shadow: 0 1.6rem 3rem rgba(14, 27, 42, 0.18);
-  will-change: transform, opacity, filter; backface-visibility: hidden;
-  transition: transform var(--d-base) var(--ease), opacity var(--d-base) var(--ease), filter var(--d-base) var(--ease);
+  will-change: transform, opacity; backface-visibility: hidden;
+  transition: transform var(--d-base) var(--ease), opacity var(--d-base) var(--ease);
   cursor: pointer;
 }
 .cf-slide.dragging { transition: none; }
-.cf-slide img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 0.5rem; pointer-events: none; -webkit-user-drag: none; }
-.cf-ui { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: 1rem; margin-top: 1.25rem; }
+/* היחס של כל צילום כתוב על התמונה עצמה (aspect-ratio), כדי שהגודל ידוע לפני הטעינה העצלה */
+.cf-slide img { display: block; width: 100%; height: auto; max-height: var(--cf-maxh, none); object-fit: contain; border-radius: 0.5rem; pointer-events: none; -webkit-user-drag: none; }
+.cf-ui { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; }
 .cf-btn { width: 2.75rem; height: 2.75rem; min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; background: var(--white); color: var(--navy); border: 1px solid var(--navy); border-radius: 50%; cursor: pointer; transition: background-color var(--d-fast) var(--ease), color var(--d-fast) var(--ease), opacity var(--d-fast) var(--ease); }
 .cf-btn:hover { background: var(--navy); color: var(--pearl); }
 .cf-btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
 .cf-btn[aria-disabled="true"]:hover { background: var(--white); color: var(--navy); }
 .cf-btn svg { width: 1rem; height: 1rem; }
-.cf-cap { text-align: center; display: grid; gap: 0.4rem; padding-top: 0.35rem; min-height: 5.5rem; }
-.cf-quote { font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.3; letter-spacing: -0.01em; transition: opacity var(--d-fast) var(--ease), transform var(--d-fast) var(--ease); }
-.cf-quote.is-out { opacity: 0; transform: translateY(0.35rem); }
-.cf-meta { font-size: 0.8125rem; color: var(--fg-2); letter-spacing: 0.02em; }
+/* בנייד: הבמה ברוחב המסך כולו, הכרטיס 88vw והמסגרת דקה, כדי שהצילום יהיה גדול. השכנים מציצים בשוליים */
+@media (max-width: 599px) {
+  #proof .head { margin-bottom: 1.5rem; }
+  .cf { --cw: 88vw; --cf-pad: 0.3rem; padding-block: 1.5rem; margin-inline: calc(var(--gutter) * -1); }
+  .cf::before, .cf::after { width: 3%; }
+  .cf-slide { border-radius: 0.6rem; box-shadow: 0 1rem 2rem rgba(14, 27, 42, 0.16); }
+  .cf-slide img { border-radius: 0.4rem; }
+}
+/* מ-600: תקרת גובה לצילום, כדי שהצילום הצר (ההמלצה השמינית) לא יגדיל את הבמה ולא יימתח פי 2 */
+@media (min-width: 600px) { .cf { --cf-maxh: 26rem; } }
+.proof-cta { display: flex; justify-content: center; margin-top: 2rem; }
 @media (min-width: 1025px) {
-  .cf-ui { margin-top: 1.75rem; gap: 2rem; max-width: 56rem; margin-inline: auto; }
-  .cf-quote { font-size: 1.55rem; }
+  .cf-ui { margin-top: 1.75rem; }
 }
 
 /* ===================== about: נעים להכיר ===================== */
 .about-text { display: grid; gap: 1rem; max-width: 36rem; color: var(--fg-2); }
+.about-text strong { color: var(--white); font-weight: 700; }
 .about-text .about-close { color: var(--fg); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem; }
-.sig { font-family: var(--display); font-weight: 700; font-size: 1.7rem; line-height: 1.1; color: var(--gold); margin-top: 0.75rem; }
-@media (min-width: 1025px) { .about-text { padding-top: 0.5rem; font-size: 1.0625rem; } }
+.sig { font-family: var(--display); font-weight: 900; font-size: 2.75rem; line-height: 1; letter-spacing: -0.02em; color: var(--gold); margin-top: 1rem; }
+@media (min-width: 1025px) { .about-text { padding-top: 0.5rem; font-size: 1.0625rem; } .sig { font-size: 3.4rem; } }
 
 /* ===================== fit: האם זה בשבילך ===================== */
 .fit-panel { padding: 1.75rem 1.25rem; border-radius: 2px; }
@@ -392,16 +453,26 @@ h2 .hi { color: var(--hi); }
 .checks li { position: relative; padding-inline-start: 1.4rem; }
 .checks li::before { content: ""; position: absolute; top: 0.72em; inset-inline-start: 0; width: 0.5rem; height: 0.5rem; background: var(--navy); }
 .fit-note { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--hair); font-size: 0.9375rem; color: var(--fg-2); }
+.fit-cta { margin-top: 1.5rem; }
 @media (min-width: 600px) { .fit-panel { padding: 2.25rem 2rem; } }
 @media (min-width: 1025px) { .fit-panel { padding: 2.75rem 2.5rem; } .fit-panel h3 { font-size: 1.75rem; } }
 
 /* ===================== framework: המסגרת ===================== */
 .fmt { display: grid; gap: 1rem; }
 .fmt-card { padding: 1.5rem 1.25rem; border-radius: 2px; display: grid; gap: 0.35rem; align-content: start; }
-.fmt-k { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; color: var(--fg-2); }
+.fmt-k { font-size: max(13px, 0.8125rem); font-weight: 700; letter-spacing: 0; color: var(--fg-2); }
 .fmt-card h3 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.01em; margin-block: 0.4rem 0.2rem; }
-.fmt-card p:last-child { color: var(--fg-2); }
-.fmt-line { margin-top: 1.5rem; max-width: 40rem; }
+.fmt-card p:last-child, .fmt-card .fmt-text { color: var(--fg-2); }
+.fmt-card.wide h3, .fmt-card .fmt-text { max-width: 40rem; }
+/* כרטיס הקבוצה ממורכז: התווית, הכותרת, הטקסט והכפתור */
+.fmt-card.wide { justify-items: center; text-align: center; }
+.fmt-card.wide .fmt-text { text-wrap: balance; }
+.fmt-card .btn { margin-top: 1rem; }
+/* ב-320 הכפתור בכרטיס הקבוצה נשבר לשתי שורות; ריפוד צר יותר משאיר אותו בשורה אחת */
+@media (max-width: 359px) { .fmt-card.wide { padding-inline: 1rem; } .fmt-card .btn { padding-inline: 0.75rem; } }
+/* שורת המועד והמחיר: באותה שפה של התווית שעל תמונת הפתיחה, לבן עם שפת זהב */
+.fmt-line { padding: 1rem 1.25rem; background: var(--white); border: 1px solid var(--rule); border-inline-start: 3px solid var(--gold); border-radius: 2px; color: var(--navy); font-size: 1.0625rem; line-height: 1.6; }
+.fmt-line strong { display: block; margin-top: 0.15rem; }
 .syl { margin-top: 2rem; border-top: 1px solid var(--navy); border-bottom: 1px solid var(--hair); }
 .syl summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding-block: 1.1rem; min-height: 44px; font-weight: 700; font-size: 1.075rem; }
 .syl summary::-webkit-details-marker { display: none; }
@@ -414,11 +485,11 @@ h2 .hi { color: var(--hi); }
 .syl[open] summary::after, .qa details[open] summary::after { transform: rotate(45deg); }
 .syl-list { list-style: none; padding: 0 0 1.25rem; display: grid; }
 .syl-list li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.8rem; border-top: 1px solid var(--hair); }
-.syl-n { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; color: var(--fg-2); padding-top: 0.25em; }
+.syl-n { font-size: max(13px, 0.8125rem); font-weight: 700; letter-spacing: 0; color: var(--fg-2); padding-top: 0.25em; }
 .syl-t { font-family: var(--display); font-weight: 700; font-size: 1.15rem; line-height: 1.35; }
 .syl-list li.pending .syl-t { color: var(--fg-2); }
-@media (min-width: 700px) { .fmt { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; } .fmt-card { padding: 2rem 1.75rem; } }
-@media (min-width: 1025px) { .fmt-card { padding: 2.5rem 2.25rem; } .fmt-card h3 { font-size: 1.9rem; } .syl { margin-top: 2.5rem; } .syl-t { font-size: 1.25rem; } }
+@media (min-width: 700px) { .fmt { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; } .fmt-card { padding: 2rem 1.75rem; } .fmt-card.wide, .fmt-line { grid-column: 1 / -1; } .fmt-line { padding: 1.15rem 1.75rem; } }
+@media (min-width: 1025px) { .fmt-card { padding: 2.5rem 2.25rem; } .fmt-card h3 { font-size: 1.9rem; } .fmt-line { padding: 1.35rem 2.25rem; font-size: 1.15rem; } .syl { margin-top: 2.5rem; } .syl-t { font-size: 1.25rem; } }
 
 /* ===================== faq ===================== */
 .qa { border-top: 1px solid var(--navy); }
@@ -436,7 +507,7 @@ h2 .hi { color: var(--hi); }
 .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
 .field label { font-size: 0.9375rem; font-weight: 600; }
 .field textarea { min-height: 6.5rem; line-height: 1.5; resize: vertical; }
-.field .opt { font-weight: 400; color: var(--ink-2); font-size: 0.85em; }
+.field .opt { font-weight: 400; color: var(--ink-2); font-size: max(13px, 0.85em); }
 .field input, .field select, .field textarea {
   width: 100%; min-height: max(48px, 3.1rem);
   padding: 0.6rem 0.85rem;
@@ -462,8 +533,7 @@ h2 .hi { color: var(--hi); }
 .consent label { font-size: 0.9375rem; line-height: 1.55; }
 .consent-note { margin-block: 0.5rem 1.5rem; padding-inline-start: 2rem; font-size: 0.875rem; color: var(--ink-2); }
 .card .btn { width: 100%; }
-.fine { margin-top: 1rem; font-size: 0.8125rem; line-height: 1.6; color: var(--ink-2); }
-.card .draft-note { margin-top: 1rem; }
+.fine { margin-top: 1rem; font-size: max(13px, 0.8125rem); line-height: 1.6; color: var(--ink-2); }
 @media (min-width: 600px) {
   .card { padding: 2.5rem 2.25rem; }
   .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
@@ -474,11 +544,9 @@ h2 .hi { color: var(--hi); }
 .th { max-width: 44rem; display: grid; gap: 1rem; justify-items: start; }
 .th h2 { outline-offset: 6px; }
 .th .lede { color: var(--fg); }
-.th p:not(.lede):not(.draft-note) { color: var(--fg-2); }
+.th p:not(.lede) { color: var(--fg-2); }
 .th .btn { margin-top: 1rem; }
 .th-ig a { color: var(--gold); }
-.th .draft-note { margin-top: 1.5rem; color: var(--mist); border-color: var(--rule-navy); }
-.linkish { background: none; border: 0; padding: 0; min-height: 44px; color: var(--gold); text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
 
 /* ===================== footer ===================== */
 #footer { padding-block: 3rem; }
@@ -489,17 +557,15 @@ h2 .hi { color: var(--hi); }
 .ft-up { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; color: var(--pearl); font-size: 0.9375rem; font-weight: 600; text-decoration: none; justify-self: start; }
 .ft-up:hover { text-decoration: underline; }
 .ft-up svg { width: 0.9rem; height: 0.9rem; }
-.ft-draft { font-size: 0.8125rem; color: var(--mist); border-top: 1px solid var(--rule-navy); padding-top: 1.25rem; }
 @media (min-width: 1025px) {
   .ft { grid-template-columns: 1fr auto auto; align-items: end; column-gap: 3rem; }
-  .ft-draft { grid-column: 1 / -1; }
 }
 
 /* ===================== כפתור צמוד בנייד ===================== */
 .dock {
   position: fixed; inset-inline: 0; bottom: 0; z-index: 30;
   padding: 0.7rem var(--gutter) calc(0.7rem + env(safe-area-inset-bottom));
-  box-shadow: 0 -1px 0 var(--rule-navy);
+  box-shadow: 0 -1px 0 var(--rule), 0 -8px 20px rgba(14, 27, 42, 0.08);
   opacity: 0; visibility: hidden;
   transition: opacity var(--d-fast) var(--ease), visibility 0s linear var(--d-fast);
 }
@@ -518,17 +584,16 @@ h2 .hi { color: var(--hi); }
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
-<p class="draft">טיוטה 3 לעיון · הטופס הוא הדגמה ולא שולח לשום מקום</p>
 
 <header class="top" id="top" data-theme="white">
   <div class="frame top-in">
-    <a class="brand" href="#hero"><img src="rinat-logo.png" width="1000" height="366" alt="רינת, מאמנת למכירות בהשפעה"></a>
+    <a class="brand" href="#hero"><img src="rinat-logo.png" width="480" height="176" alt="רינת, מאמנת למכירות בהשפעה"></a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel"><span class="vh">תפריט</span><span class="menu-ic" aria-hidden="true"></span></button>
     <nav class="nav-panel" id="nav-panel" aria-label="ניווט בדף">
       <ul class="nav-list">
         <li><a class="nav-link" href="#method">הדרך</a></li>
-        <li><a class="nav-link" href="#framework">הסדנה</a></li>
         <li><a class="nav-link" href="#about">נעים להכיר</a></li>
+        <li><a class="nav-link" href="#framework">הסדנה</a></li>
         <li><a class="nav-link" href="#faq">שאלות</a></li>
       </ul>
       <a class="btn" href="#form" data-cta="header">בואו נבדוק התאמה</a>
@@ -543,12 +608,13 @@ h2 .hi { color: var(--hi); }
   <div class="frame hero">
     <div class="hero-copy" data-reveal="stagger">
       <p class="eyebrow">מכירות והשפעה · סדנת בוטיק לבעלי עסקים</p>
-      <h1><span class="h1-a">יש לך הרבה מה לתת.</span><span class="h1-b">איך מעבירים את זה בשיחת מכירה?</span></h1>
-      <p class="lede">כשהשיחה מגיעה למחיר או ל״אני צריך לחשוב על זה״, קל לאבד את הכיוון. בסדנה נבנה דרך ברורה להוביל את השיחה, שמתאימה לאופי שלך ולעסק שלך.</p>
-      <p class="hero-line">לדעת מה לשאול. להציג ערך. להתקדם להחלטה.<br>בלי לשנן תסריטים ובלי להפעיל לחץ.</p>
+      <h1><span class="h1-a">יש לך הרבה מה לתת.</span><span class="h1-b em">איך מעבירים את&nbsp;זה <span class="nw"><span class="u">בשיחת&nbsp;מכירה</span>?</span></span></h1>
+      <p class="lede">כשהשיחה מגיעה למחיר או ל״אני צריך לחשוב על זה״, קל לאבד את הכיוון. בסדנה נבנה דרך ברורה להוביל את השיחה, עם עוגנים שמתאימים לאופי שלך ולעסק שלך.</p>
+      <p class="hero-line">בלי לשנן תסריטים, בלי להפעיל לחץ ובלי לשחק מישהו&nbsp;אחר.</p>
       <div class="cta">
         <a class="btn" id="hero-cta" href="#form" data-cta="hero">אני רוצה לבדוק התאמה לסדנה</a>
-        <p class="cta-note">שיחת אבחון וסימולציה · 30 דקות · ללא עלות וללא התחייבות</p>
+        <p class="cta-note">30 דקות · ללא עלות · ללא התחייבות</p>
+        <p class="hero-proof"><span class="hero-proof-q">״הראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים.״</span> <a class="arrow-link" href="#proof">לכל ההמלצות<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M14 8H2m5-5L2 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
       </div>
     </div>
     <figure class="hero-photo" data-reveal>
@@ -562,8 +628,8 @@ h2 .hi { color: var(--hi); }
 <section id="facts" data-theme="navy" aria-label="עובדות על הסדנה">
   <div class="frame">
     <dl class="facts" data-reveal="stagger">
-      <div><dt>06</dt><dd><strong>מפגשים מעשיים</strong><span class="vh"> · </span><span>פעם בשבוע, שעתיים</span></dd></div>
-      <div><dt>05</dt><dd><strong>משתתפים לכל היותר</strong><span class="vh"> · </span><span>מקום לתרגול וליחס אישי</span></dd></div>
+      <div><dt>6</dt><dd><strong>מפגשים מעשיים</strong><span class="vh"> · </span><span>פעם בשבוע, שעתיים</span></dd></div>
+      <div><dt>5</dt><dd><strong>משתתפים לכל היותר</strong><span class="vh"> · </span><span>מקום לתרגול וליחס אישי</span></dd></div>
       <div><dt>1:1</dt><dd><strong>פגישה אישית עם רינת</strong><span class="vh"> · </span><span>עבודה ממוקדת על העסק שלך</span></dd></div>
     </dl>
   </div>
@@ -574,21 +640,21 @@ h2 .hi { color: var(--hi); }
   <div class="frame cols">
     <div class="head" data-reveal>
       <p class="eyebrow">הרגעים הקטנים שעוצרים את השיחה</p>
-      <h2><span>העבודה שלך מצוינת.</span><span class="dim">אבל במכירה, משהו עדיין נתקע.</span></h2>
+      <h2><span>העבודה שלך מצוינת.</span><span class="em">אבל במכירה, משהו <span class="u">עדיין&nbsp;נתקע</span>.</span></h2>
     </div>
     <ol class="pains" data-reveal="stagger">
       <li>
-        <span class="num" aria-hidden="true">01</span>
-        <h3>מסבירים הרבה. לא בטוחים שהערך עובר.</h3>
+        <span class="num" aria-hidden="true">1</span>
+        <h3>מסבירים הרבה. לא&nbsp;בטוחים שהערך עובר.</h3>
         <p>סיפרת על השירות, על הניסיון ועל כל מה שכלול. ובסוף השיחה עדיין לא ברור אם הלקוח הבין איך זה יעזור לו.</p>
       </li>
       <li>
-        <span class="num" aria-hidden="true">02</span>
+        <span class="num" aria-hidden="true">2</span>
         <h3>המחיר עולה, והביטחון יורד.</h3>
         <p>פתאום מתחשק להוסיף עוד הסבר, להצדיק את הסכום או להציע הנחה לפני שהלקוח בכלל ביקש.</p>
       </li>
       <li>
-        <span class="num" aria-hidden="true">03</span>
+        <span class="num" aria-hidden="true">3</span>
         <h3>״אני צריך לחשוב״. ומה עכשיו?</h3>
         <p>רוצים לכבד את ההתלבטות, אבל גם להבין מה חסר. השיחה מסתיימת בלי לדעת אם ואיך ממשיכים.</p>
       </li>
@@ -601,7 +667,7 @@ h2 .hi { color: var(--hi); }
   <div class="frame">
     <div class="turn" data-reveal="stagger">
       <p class="eyebrow center">אפשר ללמוד להוביל את הרגעים האלה</p>
-      <h2><span>לא צריך לשנות את האופי שלך כדי למכור.</span><span class="hi">צריך דרך שמתאימה לך, ולתרגל אותה.</span></h2>
+      <h2><span>לא צריך לשנות את&nbsp;האופי שלך כדי למכור.</span><span class="hi">צריך דרך שמתאימה&nbsp;לך, ולתרגל אותה.</span></h2>
       <p class="lede">הקשבה פעילה, סקרנות והיכולת להבין אנשים הן בסיס טוב לשיחת מכירה. בסדנה נחבר אותן לעוגנים שיעזרו לך לדעת איך להתקדם, גם כשהשיחה מפתיעה.</p>
     </div>
   </div>
@@ -613,13 +679,13 @@ h2 .hi { color: var(--hi); }
     <div class="split" data-reveal="stagger">
       <div class="head">
         <p class="eyebrow">הפיצוח של רינת</p>
-        <h2>עוגנים במקום תסריטים.</h2>
+        <h2><span class="w em u">עוגנים</span> במקום תסריטים.</h2>
       </div>
       <p class="lede">מפת דרכים לשיחה, עם מקום לשפה שלך. ארבעה עוגנים שיעזרו לך להבין איפה נמצאים ומה הצעד הבא.</p>
     </div>
     <ol class="rail" data-reveal="stagger">
       <li>
-        <span class="rail-n" aria-hidden="true">01</span>
+        <span class="rail-n" aria-hidden="true">1</span>
         <p class="rail-k">עוגן 1</p>
         <h3>זהות וסמכות</h3>
         <p class="rail-lead">ניהול השיחה מתוך העוצמה הטבעית שלך.</p>
@@ -627,7 +693,7 @@ h2 .hi { color: var(--hi); }
         <p class="rail-sum">להרגיש בנוח להוביל.</p>
       </li>
       <li>
-        <span class="rail-n" aria-hidden="true">02</span>
+        <span class="rail-n" aria-hidden="true">2</span>
         <p class="rail-k">עוגן 2</p>
         <h3>אבחון ושאלות מובילות</h3>
         <p class="rail-lead">הובלת השיחה דרך הקשבה פעילה ושאלות עומק.</p>
@@ -635,7 +701,7 @@ h2 .hi { color: var(--hi); }
         <p class="rail-sum">להבין לפני שמציעים.</p>
       </li>
       <li>
-        <span class="rail-n" aria-hidden="true">03</span>
+        <span class="rail-n" aria-hidden="true">3</span>
         <p class="rail-k">עוגן 3</p>
         <h3>מניעת התנגדויות מראש</h3>
         <p class="rail-lead">פירוק ה״יקר לי״ עוד לפני שהוא נאמר.</p>
@@ -643,7 +709,7 @@ h2 .hi { color: var(--hi); }
         <p class="rail-sum">להישאר בשיחה גם כשיש ספק.</p>
       </li>
       <li>
-        <span class="rail-n" aria-hidden="true">04</span>
+        <span class="rail-n" aria-hidden="true">4</span>
         <p class="rail-k">עוגן 4</p>
         <h3>הצגת המחיר והובלה להחלטה</h3>
         <p class="rail-lead">להגיש את המחיר בביטחון מלא.</p>
@@ -654,84 +720,50 @@ h2 .hi { color: var(--hi); }
   </div>
 </section>
 
-<!-- ═══ practice ═══ -->
-<section id="practice" class="s" data-theme="white">
-  <div class="frame">
-    <div class="split" data-reveal="stagger">
-      <div class="head">
-        <p class="eyebrow">כאן מתחילים לתרגל</p>
-        <h2>את שיחת המכירה הבאה שלך אפשר להתחיל לשפר כאן.</h2>
-      </div>
-      <p class="lede">נעבוד על המצבים שמעסיקים אותך בעסק. בסימולציות ובתרגול נזהה מה כבר עובד, ומה אפשר לעשות אחרת.</p>
-    </div>
-    <ol class="steps" data-reveal="stagger">
-      <li><h3>מבינים</h3><p>מזהים את האתגר ואת העוגן שיכול לעזור להתמודד איתו.</p></li>
-      <li><h3>מתרגלים</h3><p>מתנסים בשיחה ובודקים איך הדברים נשמעים בקול שלך.</p></li>
-      <li><h3>מדייקים</h3><p>מקבלים משוב ומחדדים את השאלות, המסר וההובלה.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ═══ group ═══ -->
-<section id="group" class="s" data-theme="pearl">
-  <div class="frame cols" data-reveal="stagger">
-    <div class="head">
-      <p class="eyebrow">קבוצה קטנה. עבודה אישית.</p>
-      <h2><span>עד 5 בעלי עסקים,</span><span>כדי להתמקד באתגרי המכירה שלכם.</span></h2>
-    </div>
-    <div class="group-text">
-      <p class="lede">לצד ששת המפגשים הקבוצתיים, הסדנה כוללת פגישה אישית איתי וסימולציה על העסק שלך, וליווי בוואטסאפ בין המפגשים לשאלות ולהתייעצות.</p>
-      <a class="arrow-link" href="#form" data-cta="group">נבדוק אם זו המסגרת המתאימה לך<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M14 8H2m5-5L2 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ proof ═══ -->
 <section id="proof" class="s" data-theme="white">
   <div class="frame">
     <div class="head center" data-reveal="stagger">
       <p class="eyebrow center">מה אנשים שעבדו עם רינת מספרים</p>
-      <h2>״עשית לי ממש סדר בתהליך המכירה.״</h2>
-      <p class="draft-note">המלצות מתוך החומרים שנמסרו · ממתינות לאישור פרסום ולשיוך מדויק לסוג השירות</p>
+      <h2 class="rq-h"><span class="vh">ציטוטים מתוך ההמלצות</span><span class="rq" id="rq" aria-hidden="true"><span class="rq-i is-on">״עשית לי ממש <span class="em u">סדר&nbsp;בתהליך&nbsp;המכירה</span>.״</span><span class="rq-i">״הראית לי שמכירות יכולות להיות דבר <span class="em u">נעים לכל&nbsp;הצדדים</span>.״</span><span class="rq-i">״היה לי ממש <span class="em u">מדויק&nbsp;ופרקטי</span>.״</span><span class="rq-i">״זו סדנה מאוד פרקטית, <span class="em u">מותאמת לכם&nbsp;אישית</span>.״</span><span class="rq-i">״הסדנה ממש <span class="em u">תרמה לי&nbsp;בשיחות</span>.״</span></span></h2>
+      <button class="cf-btn rq-btn" id="rq-btn" type="button" aria-pressed="false" aria-label="עצירת הציטוטים המתחלפים"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="i-pause" d="M5.5 3v10M10.5 3v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="i-play" d="M5 3l8 5-8 5z" fill="currentColor"/></svg></button>
     </div>
     <div class="cf-wrap" data-reveal>
       <div class="cf" id="cf" tabindex="0" role="group" aria-roledescription="קרוסלה" aria-label="שמונה המלצות מוואטסאפ. חיצי המקלדת מדפדפים.">
         <div class="cf-stage" id="cf-stage">
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 1 מתוך 8" data-quote="״מאז שעברתי את הסדנה האישית עם רינת אני חד וחדור מטרה, ברור וסוגר הרבה יותר!״">
-            <img src="testimonial-3.png" width="748" height="327" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: אני רוצה לספר לכם שמאז שעברתי את הסדנה האישית עם רינת אני חד וחדור מטרה, ברור וסוגר הרבה יותר! ממש ממליץ לכם גם">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 1 מתוך 8">
+            <img src="testimonial-3.png" width="748" height="327" style="aspect-ratio: 748 / 327" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: אני רוצה לספר לכם שמאז שעברתי את הסדנה האישית עם רינת אני חד וחדור מטרה, ברור וסוגר הרבה יותר! ממש ממליץ לכם גם">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 2 מתוך 8" data-quote="״הראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים.״">
-            <img src="testimonial-8.jpeg" width="326" height="244" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: וואו, מאיפה אני מתחילה איתך? המענה המהיר, האיכות של הערך שאת נותנת, הזווית שהראית לי שקיימת במכירות. עד עכשיו פשוט שלחתי מחירון, והראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים, כשהצד השני מרגיש שאני מעריכה ומכבדת אותו. תודה עלייך ועל הדרך שבה ראיתי מכירות. ותשובת רינת: מהממת שאת">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 2 מתוך 8">
+            <img src="testimonial-8.jpeg" width="326" height="244" style="aspect-ratio: 326 / 244" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: וואו! מאיפה אני מתחילה איתך? המענה המהיר בהגזמה? האיכות של הערך שאת נותנת? הזווית שהראית לי שקיימת במכירות? עד עכשיו פשוט סלדתי מהדבר המגעיל הזה, והראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים, כשהצד השני מרגיש שאני מעריכה ומכבדת אותו, לא שום דבר שיצא לי להכיר במכירות. תודה עלייך ועל הדרך שבה את רואה מכירות ומלמדת איך באמת נכון לגשת עליהן. שרופה עלייך ושוב מלא תודה. ותשובת רינת: מהממת שאת">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 3 מתוך 8" data-quote="״סגרתי עוד 2 מכירות וזה היה ממש קל! הסדנה ממש תרמה לי בשיחות.״">
-            <img src="testimonial-2.png" width="720" height="361" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: סגרתי עוד 2 מכירות וזה היה ממש קל! הסדנה ממש תרמה לי בשיחות. ממליץ עלייך לחברים! ותשובת רינת: אני ממש שמחה לשמוע! תודה רבה על הפידבק">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 3 מתוך 8">
+            <img src="testimonial-2.png" width="720" height="361" style="aspect-ratio: 720 / 361" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: סגרתי עוד 2 מכירות וזה היה ממש קל! הסדנה ממש תרמה לי בשיחות. ממליץ עלייך לחברים! ותשובת רינת: אני ממש שמחה לשמוע! תודה רבה על הפידבק">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 4 מתוך 8" data-quote="״היה לי ממש מדויק ופרקטי. הרגשתי שבאמת הגעת מוכנה והבנת לעומק מה אני צריך.״">
-            <img src="testimonial-5.jpeg" width="656" height="402" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רינת תודה רבה על הפגישה היום!! היה לי ממש מדויק ופרקטי. הרגשתי שבאמת הגעת מוכנה והבנת לעומק מה אני צריך. לקחתי ממך וגם רשמתי לעצמי כמה נקודות סופר חשובות שאני כבר יודע שיעזרו לי בשיחות מכירה. היה סופר מקצועי ועם המון ערך, תודה. ותשובת רינת: איזה כיף, שמחה מאוד">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 4 מתוך 8">
+            <img src="testimonial-5.jpeg" width="656" height="402" style="aspect-ratio: 656 / 402" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רינת תודה רבה על הפגישה היום!! היה לי ממש מדויק ופרקטי. הרגשתי שבאמת הגעת מוכנה והבנת לעומק מה אני צריך. לקחתי ממך וגם רשמתי לעצמי כמה נקודות סופר חשובות שאני כבר יודע שיעזרו לי בשיחות מכירה. היה סופר מקצועי ועם המון ערך, תודה. ותשובת רינת: איזה כיף, שמחה מאוד">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 5 מתוך 8" data-quote="״אחרי השיחה שלנו התחלתי להוציא שיחות והצלחתי להגיב לכל התנגדות. זה קסם!״">
-            <img src="testimonial-4.png" width="945" height="500" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רציתי לעדכן שאחרי השיחה שלנו התחלתי להוציא שיחות והצלחתי להגיב לכל התנגדות. זה קסם! שוב תודה על הכל. ותשובת רינת: זה הקסם שלך! הצלחת להעביר את הערך, אני ממש שמחה לשמוע!">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 5 מתוך 8">
+            <img src="testimonial-4.png" width="945" height="500" style="aspect-ratio: 945 / 500" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רציתי לעדכן שאחרי השיחה שלנו התחלתי להוציא שיחות והצלחתי להגיב לכל התנגדות. זה קסם! שוב תודה על הכל. ותשובת רינת: זה הקסם שלך! הצלחת להעביר את הערך, אני ממש שמחה לשמוע!">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 6 מתוך 8" data-quote="״זו סדנה מאוד פרקטית, מותאמת לכם אישית. וכל מילה נוספת מיותרת.״">
-            <img src="testimonial-7.jpeg" width="547" height="236" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ בקבוצה: וגם בזכות סדנת המכירות של רינת אלשייך, להתאהב במכירות. ממש ממש ממליץ לכן לדבר איתה ולקבוע, זו סדנה מאוד פרקטית, מותאמת לכם אישית, וכל מילה נוספת מיותרת">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 6 מתוך 8">
+            <img src="testimonial-7.jpeg" width="547" height="236" style="aspect-ratio: 547 / 236" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ בקבוצה: וגם בזכות סדנת המכירות של רינת אלשייך, להתאהב במכירות. ממש ממש ממליץ לכן לדבר איתה ולקבוע, זו סדנה מאוד פרקטית, מותאמת לכם אישית, וכל מילה נוספת מיותרת">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 7 מתוך 8" data-quote="״היית כל כך עניינית וממוקדת, לא ויתרת לי והראית לי ממש איפה הנקודות לשיפור שלי.״">
-            <img src="testimonial-6.jpeg" width="538" height="221" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: רינת, היה לי כל כך כיף ללמוד ממך על מכירות. היית כל כך עניינית וממוקדת, לא ויתרת לי והראית לי ממש איפה הנקודות לשיפור שלי. אני יודע שהכלים שקיבלתי בשיחה ישפרו את יכולות המכירה שלי ברמות על. תודה רבה לך! אני בוודאות אחזור להתייעץ">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 7 מתוך 8">
+            <img src="testimonial-6.jpeg" width="538" height="221" style="aspect-ratio: 538 / 221" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: רינת, היה לי כל כך כיף ללמוד ממך על מכירות. היית כל כך עניינית וממוקדת, לא ויתרת לי והראית לי ממש איפה הנקודות לשיפור שלי. אני יודע שהכלים שקיבלתי בשיחה ישפרו את יכולות המכירה שלי ברמות על. תודה רבה לך! אני בוודאות אחזור להתייעץ">
           </figure>
-          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 8 מתוך 8" data-quote="״עשית לי ממש סדר בתהליך המכירה.״">
-            <img src="testimonial-1.png" width="724" height="283" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: וואו, רציתי להגיד לך שעשית לי ממש סדר בתהליך המכירה, יש לי היום עוד כמה שיחות, היום אעדכן אותך. ותשובת רינת: איזה כיף! מחכה לשיחה">
+          <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 8 מתוך 8">
+            <img src="testimonial-1.png" width="724" height="283" style="aspect-ratio: 724 / 283" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: וואו, רציתי להגיד לך שעשית לי ממש סדר בתהליך המכירה, יש לי היום עוד כמה שיחות, היום אעדכן אותך. ותשובת רינת: איזה כיף! מחכה לשיחה">
           </figure>
         </div>
       </div>
       <div class="cf-ui">
         <button class="cf-btn" id="cf-prev" type="button" aria-label="ההמלצה הקודמת"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="cf-cap">
-          <p class="cf-quote" id="cf-quote" aria-live="polite"></p>
-          <p class="cf-meta">הודעת וואטסאפ · <span id="cf-count"></span></p>
-        </div>
+        <p class="vh" id="cf-count" aria-live="polite">המלצה 1 מתוך 8</p>
         <button class="cf-btn" id="cf-next" type="button" aria-label="ההמלצה הבאה"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 2L4 8l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
+    <p class="proof-cta" data-reveal><a class="btn" href="#form" data-cta="proof">אני רוצה לבדוק התאמה לסדנה</a></p>
   </div>
 </section>
 
@@ -743,12 +775,73 @@ h2 .hi { color: var(--hi); }
       <h2><span>אני רינת.</span><span class="hi">גם אני למדתי למכור בדרך שלא התאימה לי.</span></h2>
     </div>
     <div class="about-text" data-reveal="stagger">
-      <p>בתחילת הדרך שלי בעולם המכירות עבדתי לפי תסריטים, דחפתי ולחצתי. סגרתי עסקאות, אבל סיימתי מותשת, עם תחושה שאני צריכה להיות מישהי אחרת כדי להצליח.</p>
-      <p>החיבור בין עולם המכירות לעולם האימון שינה את הדרך שלי. הבנתי שאפשר להוביל שיחה מתוך הקשבה פעילה, ביטחון ושפה שמתאימה לאדם שמנהל אותה.</p>
-      <p>אחרי 15 שנה בעולם המכירות והאימון, זו הדרך שאני מלמדת: לבנות עוגנים, לתרגל אותם, ולפתח יכולת מכירה שמרגישה שלך.</p>
+      <p>בתחילת הדרך שלי בעולם המכירות עבדתי <strong>לפי תסריטים, דחפתי ולחצתי</strong>. סגרתי עסקאות, אבל סיימתי מותשת, עם תחושה שאני צריכה להיות מישהי אחרת כדי להצליח.</p>
+      <p>החיבור בין עולם המכירות לעולם האימון שינה את הדרך שלי. הבנתי שאפשר להוביל שיחה מתוך <strong>הקשבה פעילה, ביטחון ושפה שמתאימה לאדם שמנהל אותה</strong>.</p>
+      <p>אחרי 15 שנה בעולם המכירות והאימון, זו הדרך שאני מלמדת: <strong>לבנות עוגנים, לתרגל אותם, ולפתח יכולת מכירה שמרגישה שלך</strong>.</p>
       <p class="about-close">המטרה שלי היא שתדעו למכור בדרך שלכם.</p>
       <p class="sig">רינת</p>
     </div>
+  </div>
+</section>
+
+<!-- ═══ practice ═══ -->
+<section id="practice" class="s" data-theme="white">
+  <div class="frame">
+    <div class="split stack" data-reveal="stagger">
+      <div class="head">
+        <p class="eyebrow">כאן מתחילים לתרגל</p>
+        <h2>את שיחת המכירה הבאה שלך אפשר <span class="w em u">להתחיל לשפר&nbsp;כאן</span>.</h2>
+      </div>
+      <p class="lede">נעבוד על המצבים שמעסיקים אותך בעסק. בסימולציות ובתרגול נזהה מה כבר עובד, ומה אפשר לעשות אחרת.</p>
+    </div>
+    <ol class="steps" data-reveal="stagger">
+      <li><h3>מבינים</h3><p>מזהים את האתגר ואת העוגן שיכול לעזור להתמודד איתו.</p></li>
+      <li><h3>מתרגלים</h3><p>מתנסים בשיחה ובודקים איך הדברים נשמעים בקול שלך.</p></li>
+      <li><h3>מדייקים</h3><p>מקבלים משוב ומחדדים את השאלות, המסר וההובלה.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ framework ═══ -->
+<section id="framework" class="s" data-theme="pearl">
+  <div class="frame">
+    <div class="split stack" data-reveal="stagger">
+      <div class="head">
+        <p class="eyebrow">המסגרת</p>
+        <h2><span>שישה מפגשים.</span><span class="em">זמן לעבוד על <span class="u">המכירות&nbsp;שלך</span>.</span></h2>
+      </div>
+      <p class="lede">פעם בשבוע, שעתיים בכל מפגש. קבוצה נפתחת עם ארבעה נרשמים, ועד חמישה משתתפים.</p>
+    </div>
+    <div class="fmt" data-reveal="stagger">
+      <div class="fmt-card" data-theme="white">
+        <p class="fmt-k">1 / נפגשים</p>
+        <h3>פרונטלי בקריית אונו</h3>
+        <p>שישה מפגשים בשעות הבוקר.</p>
+      </div>
+      <div class="fmt-card" data-theme="white">
+        <p class="fmt-k">2 / נפגשים מכל מקום</p>
+        <h3>קבוצה בזום</h3>
+        <p>שישה מפגשים בשעות הערב.</p>
+      </div>
+      <p class="fmt-line">בשיחת האבחון נעבור יחד על מועד הפתיחה של הקבוצה הקרובה, הימים והשעות. <strong>ההצעה המלאה והמחיר נשלחים אליך מיד אחריה.</strong></p>
+      <div class="fmt-card wide" data-theme="white">
+        <p class="fmt-k">קבוצה קטנה. עבודה אישית.</p>
+        <h3>עד 5 בעלי עסקים, כדי להתמקד באתגרי&nbsp;המכירה שלכם.</h3>
+        <p class="fmt-text">לצד ששת המפגשים הקבוצתיים, הסדנה כוללת פגישה אישית איתי וסימולציה על העסק שלך, וליווי בוואטסאפ בין המפגשים לשאלות ולהתייעצות.</p>
+        <a class="btn" href="#form" data-cta="group">נבדוק אם זו המסגרת המתאימה לך</a>
+      </div>
+    </div>
+    <details class="syl" data-reveal>
+      <summary>הצצה לנושאי הלימוד</summary>
+      <ol class="syl-list">
+        <li><span class="syl-n">מפגש 1</span><span class="vh"> · </span><span class="syl-t">פיצוח הזהות וכלים אימוניים במכירות</span></li>
+        <li><span class="syl-n">מפגש 2</span><span class="vh"> · </span><span class="syl-t">ניהול שיחת המכירה: תהליך מכירה אישי בעזרת עוגנים, השפעה וסגירה</span></li>
+        <li><span class="syl-n">מפגש 3</span><span class="vh"> · </span><span class="syl-t">אמנות הסקרנות, ההובלה, השיקוף ופירוק התנגדויות</span></li>
+        <li><span class="syl-n">מפגש 4</span><span class="vh"> · </span><span class="syl-t">השפה התקשורתית שלך מול השפה של הלקוח</span></li>
+        <li class="pending"><span class="syl-n">מפגש 5</span><span class="vh"> · </span><span class="syl-t">בהמשך</span></li>
+        <li class="pending"><span class="syl-n">מפגש 6</span><span class="vh"> · </span><span class="syl-t">בהמשך</span></li>
+      </ol>
+    </details>
   </div>
 </section>
 
@@ -757,7 +850,7 @@ h2 .hi { color: var(--hi); }
   <div class="frame cols">
     <div class="head" data-reveal>
       <p class="eyebrow">האם זה בשבילך?</p>
-      <h2><span>יש לך עסק.</span><span>יש לך שיחות עם לקוחות.</span><span class="dim">ורצון להשתפר בהן.</span></h2>
+      <h2><span>יש לך עסק.</span><span>יש לך שיחות עם לקוחות.</span><span class="em">ורצון <span class="u">להשתפר</span> בהן.</span></h2>
       <p class="lede">הסדנה מיועדת לבעלי עסקים שמוכרים בעצמם ורוצים דרך ברורה יותר לנהל את השיחה, גם אם מכירות מעולם לא הרגישו להם טבעיות.</p>
     </div>
     <div class="fit-panel" data-theme="pearl" data-reveal>
@@ -769,53 +862,17 @@ h2 .hi { color: var(--hi); }
         <li>יש לך נכונות לתרגל, לקבל משוב ולנסות דרך חדשה.</li>
       </ul>
       <p class="fit-note">זו סדנה שדורשת השתתפות ותרגול. היא אינה מבטיחה הכנסה מסוימת, ואינה תוכנית ליצירת לידים.</p>
+      <div class="cta fit-cta"><a class="btn" href="#form" data-cta="fit">אני רוצה לבדוק התאמה לסדנה</a></div>
     </div>
-  </div>
-</section>
-
-<!-- ═══ framework ═══ -->
-<section id="framework" class="s" data-theme="pearl">
-  <div class="frame">
-    <div class="split" data-reveal="stagger">
-      <div class="head">
-        <p class="eyebrow">המסגרת</p>
-        <h2><span>שישה מפגשים.</span><span>זמן לעבוד על המכירות שלך.</span></h2>
-      </div>
-      <p class="lede">פעם בשבוע, שעתיים בכל מפגש. קבוצה נפתחת עם ארבעה נרשמים, ועד חמישה משתתפים.</p>
-    </div>
-    <div class="fmt" data-reveal="stagger">
-      <div class="fmt-card" data-theme="white">
-        <p class="fmt-k">01 / נפגשים</p>
-        <h3>פרונטלי בקריית אונו</h3>
-        <p>שישה מפגשים בשעות הבוקר.</p>
-      </div>
-      <div class="fmt-card" data-theme="white">
-        <p class="fmt-k">02 / נפגשים מכל מקום</p>
-        <h3>קבוצה בזום</h3>
-        <p>שישה מפגשים בשעות הערב.</p>
-      </div>
-    </div>
-    <p class="fmt-line" data-reveal>את מועד פתיחת הקבוצה, היום, השעה והמחיר תקבלו בשיחת האבחון, לפני ההחלטה להירשם.</p>
-    <details class="syl" data-reveal>
-      <summary>הצצה לנושאי הלימוד</summary>
-      <ol class="syl-list">
-        <li><span class="syl-n">מפגש 1</span><span class="vh"> · </span><span class="syl-t">פיצוח הזהות וכלים אימוניים במכירות</span></li>
-        <li><span class="syl-n">מפגש 2</span><span class="vh"> · </span><span class="syl-t">ניהול שיחת המכירה: תהליך מכירה אישי בעזרת עוגנים, השפעה וסגירה</span></li>
-        <li><span class="syl-n">מפגש 3</span><span class="vh"> · </span><span class="syl-t">אמנות הסקרנות, ההובלה, השיקוף ופירוק התנגדויות</span></li>
-        <li><span class="syl-n">מפגש 4</span><span class="vh"> · </span><span class="syl-t">השפה התקשורתית שלך מול השפה של הלקוח</span></li>
-        <li class="pending"><span class="syl-n">מפגש 5</span><span class="vh"> · </span><span class="syl-t">בהמשך<span class="tag">טיוטה</span></span></li>
-        <li class="pending"><span class="syl-n">מפגש 6</span><span class="vh"> · </span><span class="syl-t">בהמשך<span class="tag">טיוטה</span></span></li>
-      </ol>
-    </details>
   </div>
 </section>
 
 <!-- ═══ faq ═══ -->
-<section id="faq" class="s" data-theme="white">
+<section id="faq" class="s" data-theme="pearl">
   <div class="frame cols">
     <div class="head" data-reveal>
       <p class="eyebrow">לפני שמתקדמים</p>
-      <h2><span>מותר להתלבט.</span><span>בואו נעשה סדר.</span></h2>
+      <h2><span>מותר להתלבט.</span><span class="em">בואו נעשה <span class="u">סדר</span>.</span></h2>
     </div>
     <div class="qa" data-reveal="stagger">
       <details>
@@ -831,7 +888,7 @@ h2 .hi { color: var(--hi); }
         <div class="a"><p>ההפך הוא הנכון. לבנות תהליך מכירה בריא ונכון כבר מההתחלה חוסך לך חודשים של תסכול, שיחות מבוזבזות ואמונות מעכבות מול כסף.</p></div>
       </details>
       <details>
-        <summary><span>ואם אני חושש לעשות סימולציה מול אחרים?<span class="tag">הצעה</span></span></summary>
+        <summary>ואם אני חושש לעשות סימולציה מול אחרים?</summary>
         <div class="a"><p>זה טבעי, ורוב המשתתפים מגיעים עם אותה מחשבה. הסימולציות הן בקבוצה של עד חמישה אנשים שנמצאים בדיוק באותו מקום, ומתחילים בקטן. ויש גם את הפגישה האישית איתי, שבה מתרגלים לבד, בלי קהל.</p></div>
       </details>
       <details>
@@ -902,7 +959,6 @@ h2 .hi { color: var(--hi); }
       <p class="consent-note">גם בלי סימון, אחזור אליך לתאם את השיחה.</p>
       <button class="btn" type="submit" data-cta="submit">אני רוצה לבדוק התאמה לסדנה</button>
       <p class="fine">הפרטים נשמרים אצלי ומשמשים לתיאום השיחה, ולדיוור רק אם סימנת. אין חובה למסור אותם, אבל בלעדיהם לא אוכל לחזור אליך. פרטים מלאים במדיניות הפרטיות.</p>
-      <p class="draft-note">טופס הדגמה בלבד. הפרטים לא נשלחים ולא נשמרים. בגרסה הפעילה רינת תחזור לתיאום שיחה.</p>
     </form>
   </div>
 </section>
@@ -915,7 +971,6 @@ h2 .hi { color: var(--hi); }
     <p>בינתיים, מזמינה אותך לקהילה שלי: קבוצת וואטסאפ שקטה, עם טיפים על מכירות ואתגרים מדי פעם.</p>
     <a class="btn" href="https://chat.whatsapp.com/ETWH6xS2ZdpJK3Lm7I1c7H" target="_blank" rel="noopener" data-cta="group">להצטרפות לקבוצה</a>
     <p class="th-ig"><a href="https://www.instagram.com/rinat_alshech/" target="_blank" rel="noopener">טיפים על מכירות בהשפעה גם באינסטגרם שלי: <bdi dir="ltr">@rinat_alshech</bdi></a></p>
-    <p class="draft-note">הדגמה: הפרטים לא נשלחו לשום מקום. <button type="button" class="linkish" id="again">חזרה לטופס</button></p>
   </div>
 </section>
 
@@ -934,12 +989,11 @@ h2 .hi { color: var(--hi); }
       <li>הצהרת נגישות</li>
     </ul>
     <a class="ft-up" href="#top">בחזרה למעלה<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 14V2M3 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <p class="ft-draft">דוגמה לעיון · הטקסטים וההמלצות כפופים לאישור רינת</p>
   </div>
 </footer>
 
-<div class="dock" id="dock" data-theme="navy">
-  <a class="btn" href="#form" data-cta="dock">אני רוצה לבדוק התאמה לסדנה</a>
+<div class="dock" id="dock" data-theme="white">
+  <a class="btn" href="#form" data-cta="dock">לבדיקת התאמה לסדנה</a>
 </div>
 
 <script>
@@ -948,6 +1002,30 @@ h2 .hi { color: var(--hi); }
   var d = document, w = window;
   var reduce = !!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var hasIO = 'IntersectionObserver' in w;
+  var sent = false;              /* אחרי שליחה מוצלחת: הכפתור הצמוד לא חוזר */
+  var dockSync = function () {};
+
+  /* ── ציטוטים מתחלפים בכותרת ההמלצות: כל 3.5 שניות, רק כשהחלק במסך. עצירה: נגיעה בציטוט, או הכפתור שנראה רק במיקוד מקלדת. בתנועה מופחתת: מתחלפים בלי מעבר ── */
+  var rq = d.getElementById('rq'), rqBtn = d.getElementById('rq-btn');
+  if (rq) {
+    var rqItems = rq.querySelectorAll('.rq-i');
+    if (rqItems.length < 2) { if (rqBtn) rqBtn.hidden = true; }
+    else {
+      var rqIdx = 0, rqTimer = null, rqUser = false, rqView = !hasIO;
+      var rqNext = function () { rqItems[rqIdx].classList.remove('is-on'); rqIdx = (rqIdx + 1) % rqItems.length; rqItems[rqIdx].classList.add('is-on'); };
+      var rqRun = function () {
+        var go = !rqUser && rqView && !d.hidden;
+        if (go && !rqTimer) rqTimer = w.setInterval(rqNext, 3500);
+        if (!go && rqTimer) { w.clearInterval(rqTimer); rqTimer = null; }
+      };
+      var rqToggle = function () { rqUser = !rqUser; if (rqBtn) rqBtn.setAttribute('aria-pressed', rqUser ? 'true' : 'false'); rqRun(); };
+      if (rqBtn) rqBtn.addEventListener('click', rqToggle);
+      rq.addEventListener('click', rqToggle);
+      d.addEventListener('visibilitychange', rqRun);
+      if (hasIO) { new IntersectionObserver(function (es) { rqView = es[0].isIntersecting; rqRun(); }).observe(rq); }
+      rqRun();
+    }
+  }
 
   /* ── 1. תפריט בנייד: כפתור, Escape, סגירה בלחיצה על קישור ── */
   var menuBtn = d.getElementById('menu-btn');
@@ -1002,10 +1080,13 @@ h2 .hi { color: var(--hi); }
   var dock = d.getElementById('dock');
   if (dock && hasIO) {
     var seen = {};
+    dockSync = function () {
+      var blocked = Object.keys(seen).some(function (k) { return seen[k]; });
+      dock.classList.toggle('is-on', !blocked && !sent);
+    };
     var dockIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
-      var blocked = Object.keys(seen).some(function (k) { return seen[k]; });
-      dock.classList.toggle('is-on', !blocked);
+      dockSync();
     }, { threshold: 0 });
     var blockers = [].slice.call(d.querySelectorAll('a.btn[href="#form"]')).filter(function (a) { return !dock.contains(a); });
     ['form', 'thanks', 'footer'].forEach(function (id) { var el = d.getElementById(id); if (el) blockers.push(el); });
@@ -1022,19 +1103,18 @@ h2 .hi { color: var(--hi); }
     var stage = d.getElementById('cf-stage');
     var slides = [].slice.call(stage.children);
     var n = slides.length;
-    var quoteEl = d.getElementById('cf-quote');
     var countEl = d.getElementById('cf-count');
     var prevBtn = d.getElementById('cf-prev');
     var nextBtn = d.getElementById('cf-next');
-    var active = 0, pos = 0, dragging = false, moved = false, startX = 0, width = 1, qt = null;
+    var active = 0, pos = 0, dragging = false, moved = false, startX = 0, width = 1;
 
     /* הכרטיס הראשון מימין, כסדר הקריאה בעברית. o חיובי = שמאלה */
     var tf = function (o) {
       var a = Math.abs(o);
       var tx = -o * 46;
       var sc = Math.max(0.64, 1 - a * 0.14);
-      if (reduce) return 'translateY(-50%) translateX(' + tx + '%) scale(' + sc + ')';
-      return 'translateY(-50%) translateX(' + tx + '%) translateZ(' + (-a * 110) + 'px) rotateY(' + (o * 14) + 'deg) scale(' + sc + ')';
+      if (reduce) return 'translateX(' + tx + '%) scale(' + sc + ')';
+      return 'translateX(' + tx + '%) translateZ(' + (-a * 110) + 'px) rotateY(' + (o * 14) + 'deg) scale(' + sc + ')';
     };
     var render = function (pp, anim) {
       slides.forEach(function (s, i) {
@@ -1042,19 +1122,14 @@ h2 .hi { color: var(--hi); }
         s.classList.toggle('dragging', !anim);
         s.style.transform = tf(o);
         s.style.opacity = String(Math.max(0, 1 - a * 0.34));
-        s.style.filter = 'brightness(' + Math.max(0.55, 1 - a * 0.22) + ')';
         s.style.zIndex = String(100 - Math.round(a * 10));
         s.style.pointerEvents = a < 1.6 ? 'auto' : 'none';
         s.setAttribute('aria-hidden', a < 0.5 ? 'false' : 'true');
       });
     };
+    /* בלי כיתוב גלוי: רק הודעה לקורא מסך, "המלצה N מתוך 8" */
     var caption = function (i) {
-      var q = slides[i].getAttribute('data-quote') || '';
-      if (countEl) countEl.textContent = (i + 1) + ' מתוך ' + n;
-      if (reduce || !quoteEl.textContent) { quoteEl.textContent = q; quoteEl.classList.remove('is-out'); return; }
-      quoteEl.classList.add('is-out');
-      clearTimeout(qt);
-      qt = setTimeout(function () { quoteEl.textContent = q; quoteEl.classList.remove('is-out'); }, 220);
+      if (countEl) countEl.textContent = 'המלצה ' + (i + 1) + ' מתוך ' + n;
     };
     var go = function (i) {
       active = Math.max(0, Math.min(n - 1, i));
@@ -1081,6 +1156,8 @@ h2 .hi { color: var(--hi); }
       if (!dragging) return;
       dragging = false;
       var np = Math.round(pos);
+      /* pos זז ביחידה אחת לכל 60% מהרוחב, ולכן 15% מהרוחב = 0.25 */
+      if (np === active && Math.abs(pos - active) >= 0.25) np = active + (pos > active ? 1 : -1);
       if (np !== active) go(np); else render(active, true);
     };
     cf.addEventListener('pointerup', end);
@@ -1119,6 +1196,8 @@ h2 .hi { color: var(--hi); }
     var formSec = d.getElementById('form');
     var thanks = d.getElementById('thanks');
     var tried = false;
+    var toForm = [].slice.call(d.querySelectorAll('a[href="#form"]'));
+    var point = function (to) { toForm.forEach(function (a) { a.setAttribute('href', to); }); };
     var rules = {
       full_name: function (v) { return v.trim().length >= 2; },
       phone: function (v) {
@@ -1154,24 +1233,12 @@ h2 .hi { color: var(--hi); }
       if (first) { first.focus(); return; }
       formSec.hidden = true;
       thanks.hidden = false;
+      sent = true;
+      point('#thanks');
+      dockSync();
+      if (dock) dock.hidden = true;
       thanks.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
       d.getElementById('thanks-title').focus({ preventScroll: true });
-    });
-    var again = d.getElementById('again');
-    if (again) again.addEventListener('click', function () {
-      form.reset();
-      tried = false;
-      names.forEach(function (nm) {
-        var el = form.elements[nm];
-        el.removeAttribute('aria-invalid');
-        el.removeAttribute('aria-describedby');
-        var err = d.getElementById(el.getAttribute('data-err'));
-        if (err) err.hidden = true;
-      });
-      thanks.hidden = true;
-      formSec.hidden = false;
-      formSec.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
-      form.elements.full_name.focus({ preventScroll: true });
     });
   }
 })();
