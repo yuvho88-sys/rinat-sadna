@@ -151,13 +151,14 @@ h2 .hi { color: var(--hi); }
 [data-theme="white"] :is(h1, h2, h3), [data-theme="pearl"] :is(h1, h2, h3) { color: var(--head); }
 [data-theme="white"] .u { color: var(--gold-on-white); }
 [data-theme="pearl"] .u { color: var(--gold-on-pearl); }
-/* זהב מבריק (03/11, יובל: "יותר זהבהב"): מעבר עדין מזהב בהיר למעלה לזהב עמוק למטה, בתוך האותיות. הצבע השטוח למעלה הוא הגיבוי */
+/* זהב מבריק (03/11, יובל: "יותר זהבהב"; 05/11 הוזז לגוונים עמוקים יותר לפי בקרת רפאל): מעבר עדין בתוך האותיות. הצבע השטוח למעלה הוא הגיבוי */
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   [data-theme="white"] .u, [data-theme="pearl"] .u {
-    background-image: linear-gradient(180deg, #E2BF63 0%, #D0A43A 38%, #B98B1C 72%, #A27714 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
   }
+  /* 05/11, יובל: "את הזהב תשאיר כמו שהיה" בדף החי. הגוונים העמוקים של רפאל לא הוחלו. הניגודיות מתחת לסף, רשום כמגבלה בהצהרת הנגישות */
+  [data-theme="white"] .u, [data-theme="pearl"] .u { background-image: linear-gradient(180deg, #E2BF63 0%, #D0A43A 38%, #B98B1C 72%, #A27714 100%); }
 }
 @media (forced-colors: active) { .u { -webkit-text-fill-color: currentColor; background: none; } }
 .nw { white-space: nowrap; }
@@ -393,14 +394,14 @@ h2 .hi { color: var(--hi); }
 #proof .head { margin-bottom: 2.5rem; }
 /* ציטוטים מתחלפים בכותרת ההמלצות: כולם באותו תא ברשת, כך שהגובה לפי הארוך ולא קופץ */
 #proof h2 > .rq { display: grid; }
-#proof .rq-i { grid-area: 1 / 1; opacity: 0; transition: opacity 0.6s ease; }
-#proof .rq-i.is-on { opacity: 1; }
-#proof .rq-btn { display: grid; margin: 1rem auto 0; width: 2.25rem; height: 2.25rem; min-width: 44px; min-height: 44px; border-color: var(--line-ui, #CBD2DA); color: var(--ink-2); }
-#proof .rq-btn svg { width: 0.75rem; height: 0.75rem; }
-#proof .rq-btn[aria-pressed="true"] .i-pause, #proof .rq-btn:not([aria-pressed="true"]) .i-play { display: none; }
-#proof .rq-btn[hidden] { display: none; }
-/* הכפתור לא נראה לעין. הוא מופיע רק במיקוד מקלדת (דרישת נגישות לעצירת תוכן שזז). בעכבר: ריחוף עוצר. במגע: נגיעה בציטוט עוצרת וממשיכה */
-#proof .rq-btn:not(:focus-visible) { position: absolute; width: 1px; height: 1px; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#proof .rq-i { grid-area: 1 / 1; opacity: 0; transition: opacity 0.3s ease; }
+#proof .rq-i.is-on { opacity: 1; transition: opacity 0.3s ease 0.3s; } /* דהייה ברצף: היוצא נעלם ורק אז הנכנס מופיע */
+/* נקודות מתחת לציטוט (05/11): מראות איזה ציטוט מוצג, ולחיצה על נקודה מציגה אותו ועוצרת את ההחלפה. דרישת נגישות לעצירת תוכן שמתחלף */
+#proof .rq-dots { display: flex; justify-content: center; gap: 0.25rem; margin-top: 0.9rem; }
+#proof .rq-dot { width: 32px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+#proof .rq-dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #8A94A3; transition: background-color 0.3s ease, transform 0.3s ease; }
+#proof .rq-dot.is-on::before { background: var(--gold-on-white); transform: scale(1.25); }
+#proof .rq-dots[hidden] { display: none; }
 /* הכרטיס עוטף את הצילום: רוחב קבוע, הגובה לפי הצילום.
    כל השקופיות באותו תא גריד, ולכן גובה הבמה הוא גובה הכרטיס הגבוה, והוא לא זז בין שקופיות */
 .cf { --cw: min(40rem, 88vw); --cf-pad: 0.85rem; position: relative; padding-block: 3rem; perspective: 90rem; perspective-origin: 50% 50%; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; }
@@ -559,6 +560,8 @@ h2 .hi { color: var(--hi); }
 .ft-name { font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.1; }
 .ft-sub { margin-top: 0.3rem; color: var(--gold); font-size: 0.9375rem; font-weight: 600; }
 .ft-links { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; color: var(--mist); font-size: 0.875rem; }
+.ft-links a { color: var(--pearl); text-decoration: underline; text-underline-offset: 0.25em; }
+.fine a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; }
 .ft-up { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; color: var(--pearl); font-size: 0.9375rem; font-weight: 600; text-decoration: none; justify-self: start; }
 .ft-up:hover { text-decoration: underline; }
 .ft-up svg { width: 0.9rem; height: 0.9rem; }
@@ -729,8 +732,8 @@ h2 .hi { color: var(--hi); }
   <div class="frame">
     <div class="head center" data-reveal="stagger">
       <p class="eyebrow center">מה אנשים שעבדו עם רינת מספרים</p>
-      <h2 class="rq-h"><span class="vh">ציטוטים מתוך ההמלצות</span><span class="rq" id="rq" aria-hidden="true"><span class="rq-i is-on">״עשית לי ממש <span class="em u">סדר&nbsp;בתהליך&nbsp;המכירה</span>.״</span><span class="rq-i">״הראית לי שמכירות יכולות להיות דבר <span class="em u">נעים לכל&nbsp;הצדדים</span>.״</span><span class="rq-i">״היה לי ממש <span class="em u">מדויק&nbsp;ופרקטי</span>.״</span><span class="rq-i">״זו סדנה מאוד פרקטית, <span class="em u">מותאמת לכם&nbsp;אישית</span>.״</span><span class="rq-i">״הסדנה ממש <span class="em u">תרמה לי&nbsp;בשיחות</span>.״</span></span></h2>
-      <button class="cf-btn rq-btn" id="rq-btn" type="button" aria-pressed="false" aria-label="עצירת הציטוטים המתחלפים"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="i-pause" d="M5.5 3v10M10.5 3v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="i-play" d="M5 3l8 5-8 5z" fill="currentColor"/></svg></button>
+      <h2 class="rq-h"><span class="vh">ציטוטים מתוך ההמלצות</span><span class="rq" id="rq"><span class="rq-i is-on">״עשית לי ממש <span class="em u">סדר&nbsp;בתהליך&nbsp;המכירה</span>.״</span><span class="rq-i" aria-hidden="true">״הראית לי שמכירות יכולות להיות דבר <span class="em u">נעים לכל&nbsp;הצדדים</span>.״</span><span class="rq-i" aria-hidden="true">״היה לי ממש <span class="em u">מדויק&nbsp;ופרקטי</span>.״</span><span class="rq-i" aria-hidden="true">״זו סדנה מאוד פרקטית, <span class="em u">מותאמת לכם&nbsp;אישית</span>.״</span><span class="rq-i" aria-hidden="true">״הסדנה ממש <span class="em u">תרמה לי&nbsp;בשיחות</span>.״</span></span></h2>
+      <div class="rq-dots" id="rq-dots"><button type="button" class="rq-dot is-on" aria-label="עצירת הציטוטים והצגת ציטוט 1 מתוך 5" aria-current="true"></button><button type="button" class="rq-dot" aria-label="עצירת הציטוטים והצגת ציטוט 2 מתוך 5"></button><button type="button" class="rq-dot" aria-label="עצירת הציטוטים והצגת ציטוט 3 מתוך 5"></button><button type="button" class="rq-dot" aria-label="עצירת הציטוטים והצגת ציטוט 4 מתוך 5"></button><button type="button" class="rq-dot" aria-label="עצירת הציטוטים והצגת ציטוט 5 מתוך 5"></button></div>
     </div>
     <div class="cf-wrap" data-reveal>
       <div class="cf" id="cf" tabindex="0" role="group" aria-roledescription="קרוסלה" aria-label="שמונה המלצות מוואטסאפ. חיצי המקלדת מדפדפים.">
@@ -962,7 +965,7 @@ h2 .hi { color: var(--hi); }
       </div>
       <p class="consent-note">גם בלי סימון, אחזור אליך לתאם את השיחה.</p>
       <button class="btn" type="submit" data-cta="submit">אני רוצה לבדוק התאמה לסדנה</button>
-      <p class="fine">הפרטים נשמרים אצלי ומשמשים לתיאום השיחה, ולדיוור רק אם סימנת. אין חובה למסור אותם, אבל בלעדיהם לא אוכל לחזור אליך. פרטים מלאים במדיניות הפרטיות.</p>
+      <p class="fine">הפרטים נשמרים אצלי ומשמשים לתיאום השיחה, ולדיוור רק אם סימנת. אין חובה למסור אותם, אבל בלעדיהם לא אוכל לחזור אליך. פרטים מלאים <a href="privacy.html" target="_blank" rel="noopener">במדיניות הפרטיות</a>.</p>
     </form>
   </div>
 </section>
@@ -988,9 +991,8 @@ h2 .hi { color: var(--hi); }
       <p class="ft-sub">מכירות והשפעה · STEP UP</p>
     </div>
     <ul class="ft-links">
-      <li>מדיניות פרטיות</li>
-      <li>תנאי שימוש</li>
-      <li>הצהרת נגישות</li>
+      <li><a href="privacy.html">מדיניות פרטיות</a></li>
+      <li><a href="accessibility.html">הצהרת נגישות</a></li>
     </ul>
     <a class="ft-up" href="#top">בחזרה למעלה<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 14V2M3 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
@@ -1025,22 +1027,30 @@ h2 .hi { color: var(--hi); }
     }
   }
 
-  /* ── ציטוטים מתחלפים בכותרת ההמלצות: כל 3.5 שניות, רק כשהחלק במסך. עצירה: נגיעה בציטוט, או הכפתור שנראה רק במיקוד מקלדת. בתנועה מופחתת: מתחלפים בלי מעבר ── */
-  var rq = d.getElementById('rq'), rqBtn = d.getElementById('rq-btn');
+  /* ── ציטוטים מתחלפים בכותרת ההמלצות: כל 3.5 שניות, רק כשהחלק במסך. עצירה: לחיצה על נקודה (מציגה את הציטוט שלה; לחיצה נוספת על הנקודה הפעילה ממשיכה) או נגיעה בציטוט. בתנועה מופחתת: ציטוט אחד קבוע, בלי נקודות ── */
+  var rq = d.getElementById('rq'), rqDotsBox = d.getElementById('rq-dots');
   if (rq) {
     var rqItems = rq.querySelectorAll('.rq-i');
-    if (rqItems.length < 2) { if (rqBtn) rqBtn.hidden = true; }
+    var rqDots = rqDotsBox ? rqDotsBox.querySelectorAll('.rq-dot') : [];
+    if (reduce || rqItems.length < 2) { if (rqDotsBox) rqDotsBox.hidden = true; }
     else {
       var rqIdx = 0, rqTimer = null, rqUser = false, rqView = !hasIO;
-      var rqNext = function () { rqItems[rqIdx].classList.remove('is-on'); rqIdx = (rqIdx + 1) % rqItems.length; rqItems[rqIdx].classList.add('is-on'); };
+      var rqShow = function (n) {
+        rqItems[rqIdx].classList.remove('is-on'); rqItems[rqIdx].setAttribute('aria-hidden', 'true');
+        if (rqDots[rqIdx]) { rqDots[rqIdx].classList.remove('is-on'); rqDots[rqIdx].removeAttribute('aria-current'); }
+        rqIdx = (n + rqItems.length) % rqItems.length;
+        rqItems[rqIdx].classList.add('is-on'); rqItems[rqIdx].removeAttribute('aria-hidden');
+        if (rqDots[rqIdx]) { rqDots[rqIdx].classList.add('is-on'); rqDots[rqIdx].setAttribute('aria-current', 'true'); }
+      };
       var rqRun = function () {
         var go = !rqUser && rqView && !d.hidden;
-        if (go && !rqTimer) rqTimer = w.setInterval(rqNext, 3500);
+        if (go && !rqTimer) rqTimer = w.setInterval(function () { rqShow(rqIdx + 1); }, 3500);
         if (!go && rqTimer) { w.clearInterval(rqTimer); rqTimer = null; }
       };
-      var rqToggle = function () { rqUser = !rqUser; if (rqBtn) rqBtn.setAttribute('aria-pressed', rqUser ? 'true' : 'false'); rqRun(); };
-      if (rqBtn) rqBtn.addEventListener('click', rqToggle);
-      rq.addEventListener('click', rqToggle);
+      for (var qi = 0; qi < rqDots.length; qi++) {
+        (function (n) { rqDots[n].addEventListener('click', function () { if (rqUser && n === rqIdx) { rqUser = false; } else { rqUser = true; rqShow(n); } rqRun(); }); })(qi);
+      }
+      rq.addEventListener('click', function () { rqUser = !rqUser; rqRun(); });
       d.addEventListener('visibilitychange', rqRun);
       if (hasIO) { new IntersectionObserver(function (es) { rqView = es[0].isIntersecting; rqRun(); }).observe(rq); }
       rqRun();
