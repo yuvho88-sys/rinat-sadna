@@ -424,6 +424,12 @@ h2 .hi { color: var(--hi); }
 .cf-slide.dragging { transition: none; }
 /* היחס של כל צילום כתוב על התמונה עצמה (aspect-ratio), כדי שהגודל ידוע לפני הטעינה העצלה */
 .cf-slide img { display: block; width: 100%; height: auto; max-height: var(--cf-maxh, none); object-fit: contain; border-radius: 0.5rem; pointer-events: none; -webkit-user-drag: none; }
+/* שם ותפקיד של מי שכתב, מתחת לצילום. רק בהמלצות שרינת שלחה להן שם (09/11) */
+.cf-cap { display: grid; justify-items: center; gap: 0.1rem; padding: 0.95rem 0.75rem 0.45rem; text-align: center; }
+.cf-cap::before { content: ""; width: 1.75rem; height: 2px; background: var(--gold); margin-bottom: 0.5rem; }
+.cf-cap-name { font-family: var(--display); font-weight: 700; font-size: 1.2rem; line-height: 1.2; color: var(--head); }
+.cf-cap-role { font-size: 1rem; line-height: 1.35; color: var(--fg-2); text-wrap: balance; }
+@media (min-width: 1025px) { .cf-cap { padding-top: 1.15rem; } .cf-cap-name { font-size: 1.45rem; } .cf-cap-role { font-size: 1.0625rem; } }
 .cf-ui { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; }
 .cf-btn { width: 2.75rem; height: 2.75rem; min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; background: var(--white); color: var(--navy); border: 1px solid var(--navy); border-radius: 50%; cursor: pointer; transition: background-color var(--d-fast) var(--ease), color var(--d-fast) var(--ease), opacity var(--d-fast) var(--ease); }
 .cf-btn:hover { background: var(--navy); color: var(--pearl); }
@@ -742,13 +748,15 @@ h2 .hi { color: var(--hi); }
             <img src="testimonial-3.png" width="748" height="327" style="aspect-ratio: 748 / 327" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: אני רוצה לספר לכם שמאז שעברתי את הסדנה האישית עם רינת אני חד וחדור מטרה, ברור וסוגר הרבה יותר! ממש ממליץ לכם גם">
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 2 מתוך 8">
-            <img src="testimonial-8.jpeg" width="326" height="244" style="aspect-ratio: 326 / 244" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: וואו! מאיפה אני מתחילה איתך? המענה המהיר בהגזמה? האיכות של הערך שאת נותנת? הזווית שהראית לי שקיימת במכירות? עד עכשיו פשוט סלדתי מהדבר המגעיל הזה, והראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים, כשהצד השני מרגיש שאני מעריכה ומכבדת אותו, לא שום דבר שיצא לי להכיר במכירות. תודה עלייך ועל הדרך שבה את רואה מכירות ומלמדת איך באמת נכון לגשת עליהן. שרופה עלייך ושוב מלא תודה. ותשובת רינת: מהממת שאת">
+            <img src="testimonial-8.jpeg" width="714" height="573" style="aspect-ratio: 714 / 573" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: וואו! מאיפה אני מתחילה איתך? המענה המהיר בהגזמה? האיכות של הערך שאת נותנת? הזווית שהראית לי שקיימת במכירות? עד עכשיו פשוט סלדתי מהדבר המגעיל הזה, והראית לי שמכירות יכולות להיות דבר נעים לכל הצדדים, כשהצד השני מרגיש שאני מעריכה ומכבדת אותו, לא שום דבר שיצא לי להכיר במכירות. תודה עלייך ועל הדרך שבה את רואה מכירות ומלמדת איך באמת נכון לגשת עליהן. שרופה עלייך ושוב מלא תודה. ותשובת רינת: מהממת שאת">
+            <figcaption class="cf-cap"><span class="cf-cap-name">נתלי טויטו</span><span class="vh"> · </span><span class="cf-cap-role">יועצת כלכלית לעסקים קטנים</span></figcaption>
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 3 מתוך 8">
             <img src="testimonial-2.png" width="720" height="361" style="aspect-ratio: 720 / 361" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: סגרתי עוד 2 מכירות וזה היה ממש קל! הסדנה ממש תרמה לי בשיחות. ממליץ עלייך לחברים! ותשובת רינת: אני ממש שמחה לשמוע! תודה רבה על הפידבק">
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 4 מתוך 8">
             <img src="testimonial-5.jpeg" width="656" height="402" style="aspect-ratio: 656 / 402" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רינת תודה רבה על הפגישה היום!! היה לי ממש מדויק ופרקטי. הרגשתי שבאמת הגעת מוכנה והבנת לעומק מה אני צריך. לקחתי ממך וגם רשמתי לעצמי כמה נקודות סופר חשובות שאני כבר יודע שיעזרו לי בשיחות מכירה. היה סופר מקצועי ועם המון ערך, תודה. ותשובת רינת: איזה כיף, שמחה מאוד">
+            <figcaption class="cf-cap"><span class="cf-cap-name">אלון קפלן</span><span class="vh"> · </span><span class="cf-cap-role">מייסד סוכנות AKTIV ומומחה לקידום ממומן</span></figcaption>
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 5 מתוך 8">
             <img src="testimonial-4.png" width="945" height="500" style="aspect-ratio: 945 / 500" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: רציתי לעדכן שאחרי השיחה שלנו התחלתי להוציא שיחות והצלחתי להגיב לכל התנגדות. זה קסם! שוב תודה על הכל. ותשובת רינת: זה הקסם שלך! הצלחת להעביר את הערך, אני ממש שמחה לשמוע!">
@@ -758,6 +766,7 @@ h2 .hi { color: var(--hi); }
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 7 מתוך 8">
             <img src="testimonial-6.jpeg" width="538" height="221" style="aspect-ratio: 538 / 221" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של הודעת וואטסאפ: רינת, היה לי כל כך כיף ללמוד ממך על מכירות. היית כל כך עניינית וממוקדת, לא ויתרת לי והראית לי ממש איפה הנקודות לשיפור שלי. אני יודע שהכלים שקיבלתי בשיחה ישפרו את יכולות המכירה שלי ברמות על. תודה רבה לך! אני בוודאות אחזור להתייעץ">
+            <figcaption class="cf-cap"><span class="cf-cap-name">הליאור אייל</span><span class="vh"> · </span><span class="cf-cap-role">מאמן מנטלי</span></figcaption>
           </figure>
           <figure class="cf-slide" role="group" aria-roledescription="שקופית" aria-label="המלצה 8 מתוך 8">
             <img src="testimonial-1.png" width="724" height="283" style="aspect-ratio: 724 / 283" loading="lazy" decoding="async" draggable="false" alt="צילום מסך של שיחת וואטסאפ: וואו, רציתי להגיד לך שעשית לי ממש סדר בתהליך המכירה, יש לי היום עוד כמה שיחות, היום אעדכן אותך. ותשובת רינת: איזה כיף! מחכה לשיחה">
@@ -843,10 +852,10 @@ h2 .hi { color: var(--hi); }
       <ol class="syl-list">
         <li><span class="syl-n">מפגש 1</span><span class="vh"> · </span><span class="syl-t">פיצוח הזהות וכלים אימוניים במכירות</span></li>
         <li><span class="syl-n">מפגש 2</span><span class="vh"> · </span><span class="syl-t">ניהול שיחת המכירה: תהליך מכירה אישי בעזרת עוגנים, השפעה וסגירה</span></li>
-        <li><span class="syl-n">מפגש 3</span><span class="vh"> · </span><span class="syl-t">אמנות הסקרנות, ההובלה, השיקוף ופירוק התנגדויות</span></li>
-        <li><span class="syl-n">מפגש 4</span><span class="vh"> · </span><span class="syl-t">השפה התקשורתית שלך מול השפה של הלקוח</span></li>
-        <li class="pending"><span class="syl-n">מפגש 5</span><span class="vh"> · </span><span class="syl-t">בהמשך</span></li>
-        <li class="pending"><span class="syl-n">מפגש 6</span><span class="vh"> · </span><span class="syl-t">בהמשך</span></li>
+        <li><span class="syl-n">מפגש 3</span><span class="vh"> · </span><span class="syl-t">אמנות הסקרנות, ההובלה והשיקוף</span></li>
+        <li><span class="syl-n">מפגש 4</span><span class="vh"> · </span><span class="syl-t">פירוק התנגדויות</span></li>
+        <li><span class="syl-n">מפגש 5</span><span class="vh"> · </span><span class="syl-t">סגנון התקשורת שלך ושל הלקוח</span></li>
+        <li><span class="syl-n">מפגש 6</span><span class="vh"> · </span><span class="syl-t">הובלה לסגירה, פולואפ ואפסיילים</span></li>
       </ol>
     </details>
   </div>
@@ -974,7 +983,7 @@ h2 .hi { color: var(--hi); }
 <section id="thanks" class="s" data-theme="navy" hidden>
   <div class="frame th">
     <h2 id="thanks-title" tabindex="-1">הפרטים אצלי.</h2>
-    <p class="lede">אני עוברת על התשובות שלך וחוזרת אליך בהקדם לתאם את שיחת האבחון והסימולציה.</p>
+    <p class="lede">אני עוברת על התשובות שלך וחוזרת אליך לנייד תוך יום עסקים אחד, לתאם את שיחת האבחון והסימולציה.</p>
     <p>בינתיים, מזמינה אותך לקהילה שלי: קבוצת וואטסאפ שקטה, עם טיפים על מכירות ואתגרים מדי פעם.</p>
     <a class="btn" href="https://chat.whatsapp.com/ETWH6xS2ZdpJK3Lm7I1c7H" target="_blank" rel="noopener" data-cta="group">להצטרפות לקבוצה</a>
     <p class="th-ig"><a href="https://www.instagram.com/rinat_alshech/" target="_blank" rel="noopener">טיפים על מכירות בהשפעה גם באינסטגרם שלי: <bdi dir="ltr">@rinat_alshech</bdi></a></p>
@@ -988,7 +997,7 @@ h2 .hi { color: var(--hi); }
   <div class="frame ft">
     <div>
       <p class="ft-name">רינת</p>
-      <p class="ft-sub">מכירות והשפעה · STEP UP</p>
+      <p class="ft-sub">מכירות והשפעה</p>
     </div>
     <ul class="ft-links">
       <li><a href="privacy.html">מדיניות פרטיות</a></li>
