@@ -575,18 +575,20 @@ h2 .hi { color: var(--hi); }
 
 /* ===================== footer ===================== */
 #footer { padding-block: 3rem; }
-.ft { display: grid; gap: 1.5rem; }
+.ft { display: grid; gap: 1.5rem; justify-items: center; text-align: center; } /* 10/11, יובל: התחתית במרכז, בכל הרוחבים */
 .ft-name { font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.1; }
 .ft-sub { margin-top: 0.3rem; color: var(--gold); font-size: 0.9375rem; font-weight: 600; }
-.ft-links { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; color: var(--mist); font-size: 0.875rem; }
+.ft-links { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.5rem; color: var(--mist); font-size: 0.875rem; }
 .ft-links a { color: var(--pearl); text-decoration: underline; text-underline-offset: 0.25em; }
 .fine a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; }
-.ft-up { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; color: var(--pearl); font-size: 0.9375rem; font-weight: 600; text-decoration: none; justify-self: start; }
+.ft-up { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; color: var(--pearl); font-size: 0.9375rem; font-weight: 600; text-decoration: none; justify-self: center; }
 .ft-up:hover { text-decoration: underline; }
 .ft-up svg { width: 0.9rem; height: 0.9rem; }
-@media (min-width: 1025px) {
-  .ft { grid-template-columns: 1fr auto auto; align-items: end; column-gap: 3rem; }
-}
+/* 10/11: אייקונים לוואטסאפ, לאינסטגרם ולפייסבוק של רינת. זהב על נייבי עמוק 9.19, יעד מגע 44 */
+.ft-social { list-style: none; padding: 0; margin-top: 1.1rem; display: flex; justify-content: center; gap: 0.75rem; }
+.ft-social a { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(212, 179, 115, 0.55); color: var(--gold); transition: background-color var(--d-fast) var(--ease), color var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease); }
+.ft-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.ft-social svg { width: 20px; height: 20px; }
 
 /* ===================== כפתור צמוד בנייד ===================== */
 .dock {
@@ -1012,6 +1014,11 @@ h2 .hi { color: var(--hi); }
     <div>
       <p class="ft-name">רינת</p>
       <p class="ft-sub">מכירות והשפעה</p>
+      <ul class="ft-social">
+        <li><a href="https://wa.me/972543039399" target="_blank" rel="noopener" aria-label="וואטסאפ לרינת (נפתח בלשונית חדשה)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.6a8.3 8.3 0 0 0-7.2 12.5L3.6 20.4l4.4-1.2A8.3 8.3 0 1 0 12 3.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.1 7.9c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .5.3l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.1.3 0 .5.5.9 1.3 1.7 2.2 2.2.2.1.4.1.5 0l.7-.8c.2-.2.4-.2.6-.1l1.8.8c.2.1.3.2.3.4v.4c0 .4-.2.9-.6 1.1-.5.3-1.2.4-1.9.2-1.5-.4-3.3-1.5-4.5-3.3-.8-1.1-1.1-2.2-1-3 .1-.6.4-1.1.6-1.5z" fill="currentColor"/></svg></a></li>
+        <li><a href="https://www.instagram.com/rinat_alshech/" target="_blank" rel="noopener" aria-label="האינסטגרם של רינת (נפתח בלשונית חדשה)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/></svg></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61577368951725" target="_blank" rel="noopener" aria-label="עמוד הפייסבוק של רינת (נפתח בלשונית חדשה)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.6-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.6V21h3z" fill="currentColor"/></svg></a></li>
+      </ul>
     </div>
     <ul class="ft-links">
       <li><a href="privacy.html">מדיניות פרטיות</a></li>
