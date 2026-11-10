@@ -989,8 +989,10 @@ h2 .hi { color: var(--hi); }
         <label for="f-consent">כן, אני רוצה לקבל מרינת אלשייך דיוור פרסומי במייל: טיפים על מכירות בהשפעה ועדכונים על סדנאות וקורסים. אפשר להסיר את עצמי בכל רגע, בקישור ההסרה שבכל מייל.</label>
       </div>
       <p class="consent-note">גם בלי סימון, אחזור אליך לתאם את השיחה.</p>
+      <div class="vh" aria-hidden="true"><label for="f-website">אתר</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <button class="btn" type="submit" data-cta="submit">אני רוצה לבדוק התאמה לסדנה</button>
-      <p class="fine">הפרטים נשמרים אצלי ומשמשים לתיאום השיחה, ולדיוור רק אם סימנת. אין חובה למסור אותם, אבל בלעדיהם לא אוכל לחזור אליך. פרטים מלאים <a href="privacy.html" target="_blank" rel="noopener">במדיניות הפרטיות</a>.</p>
+      <p class="err" id="e-submit" role="alert" hidden>לא הצלחתי לקבל את הפרטים. אפשר לנסות שוב בעוד רגע, או לכתוב לי ישירות <a href="https://wa.me/972543039399" target="_blank" rel="noopener">בוואטסאפ</a>.</p>
+      <p class="fine">הפרטים נשמרים במערכת הפניות שלי, שפועלת על השירותים Make ו־Airtable בשרתים מחוץ לישראל, ומשמשים לתיאום השיחה, ולדיוור רק אם סימנת. אין חובה למסור אותם, אבל בלעדיהם לא אוכל לחזור אליך. פרטים מלאים <a href="privacy.html" target="_blank" rel="noopener">במדיניות הפרטיות</a>.</p>
     </form>
   </div>
 </section>
@@ -1250,7 +1252,9 @@ h2 .hi { color: var(--hi); }
     go(0);
   }
 
-  /* ── 6. הטופס: הדגמה בלבד. אימות, ואז מעבר לחלק thanks. שום שליחה ── */
+  /* ── 6. הטופס: אימות, שליחה לוובהוק של מייק (10/11/2026), ותודה רק אחרי {"ok":true}.
+        החוזה: build-kit/06-בנייה-קליטת-לידים-10-11-2026.md ── */
+  var HOOK = 'https://hook.us2.make.com/7uiwexyi6iaa5ypd1q2k7ha5wzh8m4y6';
   var form = d.getElementById('lead');
   if (form) {
     var formSec = d.getElementById('form');
@@ -1285,12 +1289,10 @@ h2 .hi { color: var(--hi); }
       el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', function () { if (tried) check(el); });
       el.addEventListener('blur', function () { if (tried) check(el); });
     });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      tried = true;
-      var first = null;
-      names.forEach(function (nm) { var el = form.elements[nm]; if (!check(el) && !first) first = el; });
-      if (first) { first.focus(); return; }
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var submitErr = d.getElementById('e-submit');
+    var sending = false;
+    var showThanks = function () {
       formSec.hidden = true;
       thanks.hidden = false;
       sent = true;
@@ -1299,6 +1301,42 @@ h2 .hi { color: var(--hi); }
       if (dock) dock.hidden = true;
       thanks.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
       d.getElementById('thanks-title').focus({ preventScroll: true });
+    };
+    var busy = function (on) {
+      sending = on;
+      submitBtn.disabled = on;
+      submitBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+      submitBtn.firstChild.nodeValue = on ? 'שולחים…' : 'אני רוצה לבדוק התאמה לסדנה';
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending) return;
+      tried = true;
+      submitErr.hidden = true;
+      var first = null;
+      names.forEach(function (nm) { var el = form.elements[nm]; if (!check(el) && !first) first = el; });
+      if (first) { first.focus(); return; }
+      if (form.elements.website.value) { showThanks(); return; }   /* שדה המלכודת מולא: כנראה רובוט */
+      var fd = new FormData(form);
+      fd.set('page_url', location.href);
+      var q = new URLSearchParams(location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) { if (q.get(k)) fd.set(k, q.get(k)); });
+      if (fd.get('marketing_consent') === 'yes') fd.set('consent_text', d.querySelector('label[for="f-consent"]').textContent.trim());
+      busy(true);
+      var ctrl = 'AbortController' in window ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
+      fetch(HOOK, { method: 'POST', body: new URLSearchParams(fd), signal: ctrl ? ctrl.signal : undefined })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          clearTimeout(timer);
+          if (data && data.ok === true) { busy(false); showThanks(); return; }
+          throw new Error('not ok');
+        })
+        .catch(function () {
+          clearTimeout(timer);
+          busy(false);
+          submitErr.hidden = false;
+        });
     });
   }
 })();
